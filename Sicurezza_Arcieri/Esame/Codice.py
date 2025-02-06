@@ -203,3 +203,10 @@ def analyze_log(file_path, output_dir):
 
 if __name__ == "__main__":
     analyze_log("NASA_access_log_Aug95.txt", "log_reports")
+
+
+
+
+
+
+    #aggiorna
