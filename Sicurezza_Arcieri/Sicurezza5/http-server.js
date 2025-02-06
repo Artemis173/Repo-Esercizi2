@@ -3,7 +3,7 @@ npm i express
 npm i eventsource
 */
 
-const https = require("https");
+const http = require("https");
 const fs = require("fs");
 const express = require("express");
 const app = express();
@@ -11,39 +11,20 @@ const app = express();
 // Serve static files
 app.use(express.static("./"));
 
-app.get("/events", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream"); //!!!!!!!
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-
-  let counter = 0;
-
-  const interval = setInterval(() => {
-    counter++;
-    res.write(
-      `data: ${JSON.stringify({
-        message: "Hello from server!",
-        count: counter,
-      })}\n\n`
-    );
-  }, 3000);
-
-  req.on("close", () => {
-    clearInterval(interval);
-    console.log("Client disconnected");
-  });
-});
-
-// Example route
+// // Example Addizionatore
 app.get("/api", (req, res) => {
-  res.json({ message: "Hello, Secure World!" });
+    // Per leggere gli elementi di query: req.query.<nome chiave>
+    // GET /api?add1=10&add2=20&username=user01
+    let add1 = req.query.add1;
+    let add2 = req.query.add2;
+    let user = req.query.username
+    if (user == "user01") {
+        res.json({ risposta: add1 + add2 });
+    } else {
+        res.json({ risposta: add2 + add1 });
+    }
 });
-
-const options = {
-  key: fs.readFileSync("localhost-key.pem"),
-  cert: fs.readFileSync("localhost.pem"),
-};
 
 https.createServer(options, app).listen(3000, () => {
-  console.log("HTTPS server running at https://localhost:3000");
+  console.log("HTTP server running at https://localhost:3000");
 });
