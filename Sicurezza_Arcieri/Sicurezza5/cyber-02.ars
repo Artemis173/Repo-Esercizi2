@@ -1,17 +1,16 @@
 
-DEFINE ipset caso01_ip = {*.*.*.*:8888}; 
-DEFINE ipset tuttigli_ip = {*.*.*.*:*};
+DEFINE ipset caso01_ip = {*.*.*.*:30002}; 
 
 DEFINE urlset caso01_url = { /api, /api*, /api/*/ }; // */
 
-DEFINE utenti_bloccati = {"enwere", "amendola"}
+DEFINE set utenti_bloccati = { "enwere", "amendola" };
 
 DEFINE AR "Caso01"
     CONDITION
        http.url is in caso01_url
        // http.host is "172.31.102.126"
     ACTION
-        TCP.REDIRECT "172.31.102.126:8088"
+        TCP.REDIRECT "172.31.102.126:3000"
     ;
 
 DEFINE AR "Il Resto"
@@ -28,7 +27,7 @@ DEFINE VR "log"
         REPORT pippo { 
       CAT { 
         "IP source: ", net.ipsrc, "\n", 
-        "IP dst: ", net.ipdst "\n",
+        "IP dst: ", net.ipdst, "\n",
         "Host: ", http.host, ", ", http.method, ", ", http.uri, ", ", OBS.TIME,
         "\n"
         }}
