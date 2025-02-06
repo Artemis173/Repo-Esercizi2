@@ -3,7 +3,7 @@ npm i express
 npm i eventsource
 */
 
-const http = require("https");
+const http = require("http");
 const fs = require("fs");
 const express = require("express");
 const app = express();
@@ -27,6 +27,9 @@ app.get("/api", (req, res) => {
 
 let options = {};
 
+let host = "172.31.102.126";
+let port = 3000;
+
 http.createServer(options, app).listen(3000, () => {
-  console.log("HTTP server running at https://localhost:3000");
+  console.log("HTTP server running at http://172.31.102.126:3000");
 });

@@ -18,8 +18,7 @@ Costruire un insieme di regole che:
 */ *)
 
 DEFINE ipset caso01_ip = {*.*.*.*30002}; 
-DEFINE ipset caso02_ip = {*.*.*.*:30003
-    };
+DEFINE ipset caso02_ip = {*.*.*.*:30003};
 DEFINE ipset tuttigli_ip = {*.*.*.*:*};
 
 DEFINE urlset caso01_url = { /Sito1, /Sito1*, /Sito1/*/ }; // */
