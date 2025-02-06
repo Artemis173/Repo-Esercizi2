@@ -1,0 +1,230 @@
+{
+    "filiali": [
+        {
+            "partita_iva": "12345678901",
+            "nome": "Filiale Milano",
+            "indirizzo_sede": "Via Milano, 1",
+            "civico": "1",
+            "telefono": "0202030301",
+            "case_vendute": 2,
+            "case_affittate": 5
+        },
+        {
+            "partita_iva": "23456789012",
+            "nome": "Filiale Roma",
+            "indirizzo_sede": "Via Roma, 5",
+            "civico": "5",
+            "telefono": "0303040506",
+            "case_vendute": 3,
+            "case_affittate": 2
+        },
+        {
+            "partita_iva": "34567890123",
+            "nome": "Filiale Torino",
+            "indirizzo_sede": "Via Torino, 2",
+            "civico": "2",
+            "telefono": "0404050607",
+            "case_vendute": 1,
+            "case_affittate": 4
+        },
+        {
+            "partita_iva": "45678901234",
+            "nome": "Filiale Napoli",
+            "indirizzo_sede": "Via Napoli, 3",
+            "civico": "3",
+            "telefono": "0505060708",
+            "case_vendute": 4,
+            "case_affittate": 6
+        },
+        {
+            "partita_iva": "56789012345",
+            "nome": "Filiale Firenze",
+            "indirizzo_sede": "Via Firenze, 7",
+            "civico": "7",
+            "telefono": "0606070809",
+            "case_vendute": 5,
+            "case_affittate": 3
+        },
+        {
+            "partita_iva": "17317317317",
+            "nome": "Filiale Lisbona",
+            "indirizzo_sede": "Largo dos Loios, 17",
+            "civico": "17",
+            "telefono": "3992233720",
+            "case_vendute": 0,
+            "case_affittate": 0
+        }
+    ],
+    "case_in_vendita": [
+        {
+            "catastale": "B67890",
+            "indirizzo": "Via Roma, 15",
+            "prezzo_vendita": 320000,
+            "superficie": 95,
+            "numero_stanze": 4,
+            "stato": "libero"
+        },
+        {
+            "catastale": "C11111",
+            "indirizzo": "Via Torino, 22",
+            "prezzo_vendita": 270000,
+            "superficie": 85,
+            "numero_stanze": 3,
+            "stato": "occupato"
+        },
+        {
+            "catastale": "D22222",
+            "indirizzo": "Via Napoli, 30",
+            "prezzo_vendita": 380000,
+            "superficie": 120,
+            "numero_stanze": 5,
+            "stato": "libero"
+        },
+        {
+            "catastale": "E33333",
+            "indirizzo": "Via Firenze, 8",
+            "prezzo_vendita": 200000,
+            "superficie": 75,
+            "numero_stanze": 2,
+            "stato": "occupato"
+        }
+    ],
+    "case_in_affitto": [
+        {
+            "catastale": "F44444",
+            "indirizzo": "Via Milano, 20",
+            "prezzo_affitto": 1000,
+            "superficie": 70,
+            "numero_stanze": 3,
+            "durata_contratto": 12,
+            "stato": "totale",
+            "bagno_personale": true
+        },
+        {
+            "catastale": "G55555",
+            "indirizzo": "Via Roma, 25",
+            "prezzo_affitto": 1200,
+            "superficie": 80,
+            "numero_stanze": 3,
+            "durata_contratto": 18,
+            "stato": "parziale",
+            "bagno_personale": false
+        },
+        {
+            "catastale": "H66666",
+            "indirizzo": "Via Torino, 35",
+            "prezzo_affitto": 950,
+            "superficie": 60,
+            "numero_stanze": 2,
+            "durata_contratto": 24,
+            "stato": "totale",
+            "bagno_personale": false
+        },
+        {
+            "catastale": "I77777",
+            "indirizzo": "Via Napoli, 40",
+            "prezzo_affitto": 1400,
+            "superficie": 100,
+            "numero_stanze": 4,
+            "durata_contratto": 6,
+            "stato": "parziale",
+            "bagno_personale": true
+        },
+        {
+            "catastale": "J88888",
+            "indirizzo": "Via Firenze, 50",
+            "prezzo_affitto": 850,
+            "superficie": 65,
+            "numero_stanze": 2,
+            "durata_contratto": 12,
+            "stato": "totale",
+            "bagno_personale": false
+        }
+    ],
+    "vendite_casa": [
+        {
+            "catastale": "A12345",
+            "data_vendita": "2023-06-15",
+            "filiale_proponente": "Filiale Milano",
+            "filiale_venditrice": "Filiale Roma",
+            "prezzo_vendita": 250000
+        },
+        {
+            "catastale": "B67890",
+            "data_vendita": "2023-07-20",
+            "filiale_proponente": "Filiale Roma",
+            "filiale_venditrice": "Filiale Torino",
+            "prezzo_vendita": 320000
+        },
+        {
+            "catastale": "C11111",
+            "data_vendita": "2023-08-10",
+            "filiale_proponente": "Filiale Torino",
+            "filiale_venditrice": "Filiale Napoli",
+            "prezzo_vendita": 270000
+        },
+        {
+            "catastale": "D22222",
+            "data_vendita": "2023-05-25",
+            "filiale_proponente": "Filiale Napoli",
+            "filiale_venditrice": "Filiale Firenze",
+            "prezzo_vendita": 380000
+        },
+        {
+            "catastale": "E33333",
+            "data_vendita": "2023-09-05",
+            "filiale_proponente": "Filiale Firenze",
+            "filiale_venditrice": "Filiale Milano",
+            "prezzo_vendita": 200000
+        },
+        {
+            "catastale": "A12345",
+            "data_vendita": "2023-06-15",
+            "filiale_proponente": "Filiale Milano",
+            "filiale_venditrice": "Filile Roma",
+            "prezzo_vendita": 250000.0
+        }
+    ],
+    "affitti_casa": [
+        {
+            "catastale": "F44444",
+            "data_affitto": "2023-06-01",
+            "filiale_proponente": "Filiale Milano",
+            "filiale_venditrice": "Filiale Torino",
+            "prezzo_affitto": 1000,
+            "durata_contratto": 12
+        },
+        {
+            "catastale": "G55555",
+            "data_affitto": "2023-07-15",
+            "filiale_proponente": "Filiale Roma",
+            "filiale_venditrice": "Filiale Firenze",
+            "prezzo_affitto": 1200,
+            "durata_contratto": 18
+        },
+        {
+            "catastale": "H66666",
+            "data_affitto": "2023-08-01",
+            "filiale_proponente": "Filiale Torino",
+            "filiale_venditrice": "Filiale Napoli",
+            "prezzo_affitto": 950,
+            "durata_contratto": 24
+        },
+        {
+            "catastale": "I77777",
+            "data_affitto": "2023-09-10",
+            "filiale_proponente": "Filiale Napoli",
+            "filiale_venditrice": "Filiale Milano",
+            "prezzo_affitto": 1400,
+            "durata_contratto": 6
+        },
+        {
+            "catastale": "J88888",
+            "data_affitto": "2023-10-01",
+            "filiale_proponente": "Filiale Firenze",
+            "filiale_venditrice": "Filiale Roma",
+            "prezzo_affitto": 850,
+            "durata_contratto": 12
+        }
+    ]
+}

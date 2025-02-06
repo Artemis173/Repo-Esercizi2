@@ -1,0 +1,149 @@
+Monthly Summary Report:
+Total Requests: 1552507
+Total MB Transferred: 25441.42 MB
+### Funzione 'Requests per Hour': Mostra la distribuzione delle richieste orarie per il mese.
+
+Requests per Hour:
+      Requests  MB Transferred
+hour                          
+00       47121      816.585464
+01       37993      712.084115
+02       31771      574.074732
+03       29487      523.472623
+04       26452      462.352679
+05       27278      494.602785
+06       31005      512.140495
+07       46988      716.253202
+08       64869      964.735788
+09       77986     1187.957147
+10       87409     1377.588085
+11       94469     1476.560270
+12      104035     1666.716343
+13      103483     1708.357677
+14      100437     1551.391129
+15      108454     1675.036303
+16       98501     1631.329522
+17       79916     1351.187284
+18       66072     1193.815429
+19       58555     1020.877560
+20       59162     1012.660908
+21       57295      925.798564
+22       59927      958.464117
+23       53842      927.373099
+### Funzione 'Request Types': Mostra la distribuzione dei metodi HTTP (GET, POST, PUT, ecc.) per il mese.
+
+Request Types:
+method
+GET     1548468
+HEAD       3962
+POST         77
+### Funzione 'Response Codes': Mostra la distribuzione dei codici di risposta HTTP (200, 404, 500, ecc.) per il mese.
+
+Response Codes:
+status
+200    1395712
+304     134138
+302      22654
+500          3
+
+Total Errors: 3
+Error Percentage: 0.00%
+### Funzione 'File Types Accessed': Mostra la distribuzione dei tipi di file richiesti nel mese.
+
+File Types Accessed:
+0
+gif         929440
+html        330443
+xbm          46313
+jpg          29175
+pl           27522
+txt          18241
+mpg          15751
+htm          12970
+GIF          12500
+jpeg          4106
+wav           1329
+JPG            594
+WAV            275
+map            121
+eps             85
+pdf             66
+bps             63
+bak             60
+perl            38
+bmp             33
+ksc             30
+92              15
+zip             12
+91              10
+art              8
+93               7
+90               7
+html1            6
+doc              6
+exe              6
+good             6
+com              5
+bad              5
+dat              5
+bak1             5
+old              5
+lists            4
+out              3
+software         3
+new              3
+orig             3
+BPS              2
+winvn            2
+ps               2
+jpl              2
+05               1
+89               1
+llv              1
+elements         1
+toc              1
+avi              1
+tle              1
+const            1
+sta              1
+jsc              1
+dec              1
+log              1
+### Funzione 'Top Pages Accessed': Mostra le 15 pagine più richieste nel mese.
+
+Top 15 Most Visited Pages:
+page
+/images/NASA-logosmall.gif                         97267
+/images/KSC-logosmall.gif                          75278
+/images/MOSAIC-logosmall.gif                       67349
+/images/USA-logosmall.gif                          66968
+/images/WORLD-logosmall.gif                        66344
+/images/ksclogo-medium.gif                         62663
+/ksc.html                                          43604
+/history/apollo/images/apollo-logo1.gif            37804
+/images/launch-logo.gif                            35116
+/                                                  30100
+/images/ksclogosmall.gif                           27787
+/shuttle/missions/sts-69/mission-sts-69.html       24580
+/shuttle/countdown/                                24441
+/shuttle/missions/sts-69/count69.gif               24361
+/shuttle/missions/sts-69/sts-69-patch-small.gif    23390
+### Funzione 'Top Hosts Accessing': Mostra i 15 host più attivi nel mese.
+
+Top 15 Most Active Hosts:
+host
+edams.ksc.nasa.gov      6503
+piweba4y.prodigy.com    4797
+163.206.89.4            4769
+piweba5y.prodigy.com    4564
+piweba3y.prodigy.com    4354
+www-d1.proxy.aol.com    3862
+www-b2.proxy.aol.com    3516
+www-b3.proxy.aol.com    3431
+www-c5.proxy.aol.com    3403
+www-b5.proxy.aol.com    3381
+www-c2.proxy.aol.com    3376
+www-d2.proxy.aol.com    3369
+www-a2.proxy.aol.com    3325
+news.ti.com             3276
+www-d3.proxy.aol.com    3273

@@ -1,0 +1,76 @@
+(* /*
+Sia dato un sistema di servizi WEB.
+Costruire un insieme di regole che:
+- caso01: per tutti gli indirizzi IP del server e
+  per la porta 8080 consentano
+  l'accesso alle pagine del sottoalbero /sito01/
+  del server 172.31.102.126
+
+- caso02: per tutti gli indirizzi IP del server e 
+  per la porta 80 consentano
+  l'accesso alle pagine del sottoalbero /sito02
+  del server 172.31.102.126
+
+- In via temporanea, in attesa del completamento
+  del sito per tutte le richieste su pagine
+  differenti rispondere con 
+  il messaggo "sito in allestimento"
+*/ *)
+
+DEFINE ipset caso01_ip = {*.*.*.*30002}; 
+DEFINE ipset caso02_ip = {*.*.*.*:30003
+    };
+DEFINE ipset tuttigli_ip = {*.*.*.*:*};
+
+DEFINE urlset caso01_url = { /Sito1, /Sito1*, /Sito1/*/ }; // */
+DEFINE urlset caso02_url = { /Sito2, /Sito2*, /Sito2/*/ }; // */
+
+DEFINE AR "Caso01"
+    CONDITION
+       http.url is in caso01_url
+       // net.ipdst is in caso01_ip
+    ACTION
+        TCP.REDIRECT "172.31.102.126:8088"
+    ;
+
+DEFINE AR "Caso02"
+    CONDITION
+       http.url is in caso02_url
+       // net.ipdst is in caso02_ip
+    ACTION
+        TCP.REDIRECT "172.31.102.126:8089"
+    ;
+
+DEFINE AR "Il Resto"
+    CONDITION
+       net.ipdst is in tuttigli_ip
+    ACTION
+        ANSWER "<h1>Sito in allestimento</h1>"
+    ;
+
+DEFINE VR "log"
+  CONDITION
+      obs.event is net.send
+  ACTION
+        REPORT pippo { 
+      CAT { 
+        "IP source: ", net.ipsrc ":[0-9]+" "", ". Port source: ",  net.ipsrc "[0-9.]+:" "", 
+        "IP dst: ", net.ipdst ":[0-9]+" "", ". Port source: ",  net.ipdst "[0-9.]+:" "",
+        "Host: ", http.host, http.method, http.uri,
+        "\n"
+        }}
+    ;
+DEFINE VR "log"
+  CONDITION
+      obs.event is net.send
+  ACTION
+        REPORT pippo { 
+      CAT { 
+        "IP source: ", net.ipsrc, 
+        "IP dst: ", net.ipdst,
+        "Host: ", http.host, http.method, http.uri,
+        "\n"
+        }}
+  ;
+
+

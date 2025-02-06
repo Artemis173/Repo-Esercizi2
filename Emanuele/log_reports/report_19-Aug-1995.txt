@@ -1,0 +1,201 @@
+Date: 19/Aug/1995
+Total Requests: 31777
+Total MB Transferred: 551.22 MB
+
+Requests per Hour:
+      Requests  MB Transferred
+hour                          
+00        1616       23.398258
+01         958       21.003816
+02        1163       21.215714
+03        1023       13.825461
+04         733       12.471766
+05         612        9.521777
+06         819       18.343247
+07         920       14.956634
+08        1065       16.001396
+09        1336       26.703584
+10        1499       27.619652
+11        1496       26.511563
+12        1500       23.862889
+13        1400       27.265543
+14        1970       37.451138
+15        1705       30.101459
+16        1522       20.576046
+17        1613       27.223958
+18        1320       19.123433
+19        1352       28.308868
+20        1512       24.851095
+21        1513       27.358304
+22        1514       22.850820
+23        1616       30.676155
+
+Request Types:
+method
+GET     31744
+HEAD       32
+POST        1
+
+Response Codes:
+status
+200    28343
+304     2957
+302      477
+
+Total Errors: 0
+Error Percentage: 0.00%
+
+File Types Accessed:
+0
+gif      18721
+html      7196
+xbm       1021
+jpg        706
+txt        397
+mpg        379
+pl         270
+GIF        234
+htm        185
+jpeg        51
+wav         28
+JPG          6
+92           5
+91           2
+zip          2
+map          2
+bak          1
+ksc          1
+lists        1
+
+Top 50 Pages Accessed:
+page
+/images/KSC-logosmall.gif                              1717
+/images/NASA-logosmall.gif                             1587
+/images/MOSAIC-logosmall.gif                           1221
+/images/USA-logosmall.gif                              1216
+/images/WORLD-logosmall.gif                            1203
+/images/ksclogo-medium.gif                             1055
+/history/apollo/images/apollo-logo1.gif                 925
+/images/launch-logo.gif                                 857
+/                                                       661
+/shuttle/missions/sts-69/mission-sts-69.html            657
+/shuttle/missions/missions.html                         623
+/shuttle/missions/sts-69/sts-69-patch-small.gif         611
+/ksc.html                                               610
+/images/ksclogosmall.gif                                595
+/images/launchmedium.gif                                544
+/shuttle/countdown/                                     519
+/shuttle/missions/sts-69/count69.gif                    501
+/software/winvn/winvn.html                              320
+/history/history.html                                   308
+/software/winvn/winvn.gif                               284
+/software/winvn/wvsmall.gif                             281
+/software/winvn/bluemarb.gif                            275
+/history/apollo/images/apollo-small.gif                 268
+/icons/menu.xbm                                         267
+/icons/blank.xbm                                        266
+/history/apollo/apollo.html                             245
+/history/apollo/images/footprint-logo.gif               235
+/history/apollo/images/footprint-small.gif              231
+/icons/image.xbm                                        230
+/shuttle/resources/orbiters/orbiters-logo.gif           193
+/shuttle/countdown/video/livevideo2.gif                 190
+/htbin/cdt_main.pl                                      168
+/history/apollo/apollo-13/apollo-13.html                166
+/images/kscmap-tiny.gif                                 144
+/images/                                                144
+/images/shuttle-patch-logo.gif                          142
+/shuttle/resources/orbiters/endeavour.html              141
+/history/apollo/apollo-13/apollo-13-patch-small.gif     136
+/shuttle/missions/sts-71/sts-71-patch-small.gif         136
+/shuttle/technology/sts-newsref/stsref-toc.html         136
+/shuttle/countdown/images/countclock.gif                132
+/shuttle/missions/sts-69/images/images.html             125
+/facilities/lc39a.html                                  119
+/shuttle/resources/orbiters/endeavour-logo.gif          118
+/shuttle/missions/sts-70/sts-70-patch-small.gif         112
+/icons/unknown.xbm                                      112
+/shuttle/missions/sts-69/movies/movies.html             109
+/images/shuttle-patch-small.gif                         104
+/icons/text.xbm                                         102
+/history/apollo/images/apollo-logo.gif                  102
+
+Top 50 Hosts Accessing:
+host
+rmcg.cts.com                    262
+www-b3.proxy.aol.com            249
+piweba4y.prodigy.com            245
+piweba5y.prodigy.com            193
+www-d1.proxy.aol.com            192
+piweba3y.prodigy.com            191
+www-c6.proxy.aol.com            178
+www-c4.proxy.aol.com            177
+www-c5.proxy.aol.com            174
+www-c1.proxy.aol.com            165
+www-a2.proxy.aol.com            154
+wi70.rz.uni-karlsruhe.de        141
+www-a1.proxy.aol.com            134
+ccms1.mayo.edu                  130
+www-d3.proxy.aol.com            129
+www-b5.proxy.aol.com            126
+www-b4.proxy.aol.com            124
+www-d4.proxy.aol.com            123
+www-c3.proxy.aol.com            113
+www-c2.proxy.aol.com            110
+arrow.csci.unt.edu              105
+portal-as2.labyrinth.net.au     101
+miriworld.its.unimelb.edu.au     95
+piweba1y.prodigy.com             95
+204.191.105.37                   92
+www-d2.proxy.aol.com             86
+parker.tmc.tmcnet.or.jp          85
+pellew.ntu.edu.au                85
+axpgs0.lngs.infn.it              83
+www-b2.proxy.aol.com             80
+www-e1f.gnn.com                  80
+core.exp.interop.net             71
+dialnet20.hti.net                70
+204.181.41.13                    70
+dialup00025.cinet.itl.net        70
+barb.wchat.on.ca                 69
+general.sbceo.k12.ca.us          67
+inet-tis.toshiba.co.jp           67
+157.159.15.72                    67
+poppy.hensa.ac.uk                66
+192.244.190.197                  64
+wizard.spry.com                  62
+eb1ppp24.globalcom.net           60
+n874364.ksc.nasa.gov             60
+edams.ksc.nasa.gov               60
+nntp1.reach.com                  60
+dialin0.datanet.ab.ca            60
+ppp-mia2-65.bridge.net           58
+osk0080.bekkoame.or.jp           57
+134.120.220.153                  57
+
+Top 5 Hosts Accessing:
+host
+rmcg.cts.com            262
+www-b3.proxy.aol.com    249
+piweba4y.prodigy.com    245
+piweba5y.prodigy.com    193
+www-d1.proxy.aol.com    192
+
+Top 5 Pages Accessed:
+page
+/images/KSC-logosmall.gif       1717
+/images/NASA-logosmall.gif      1587
+/images/MOSAIC-logosmall.gif    1221
+/images/USA-logosmall.gif       1216
+/images/WORLD-logosmall.gif     1203
+Busiest Hour: 14
+Busiest Day: 19/Aug/1995
+
+
+### Funzione 'Requests per Hour': Mostra come sono distribuite le richieste durante le varie ore del giorno.
+### Funzione 'Request Types': Mostra la distribuzione dei metodi HTTP (GET, POST, PUT, ecc.) per il giorno.
+### Funzione 'Response Codes': Mostra la distribuzione dei codici di risposta HTTP (200, 404, 500, ecc.) per il giorno.
+### Funzione 'Error Percentage': Calcola e mostra la percentuale di richieste con errori (status >= 400).
+### Funzione 'Top Pages Accessed': Mostra le 50 pagine più richieste nel giorno specificato.
+### Funzione 'Top Hosts Accessing': Mostra gli 50 host con il numero maggiore di richieste nel giorno.
+### Funzione 'Top Hosts and Pages': Mostra gli host e le pagine più visitate per identificare tendenze di traffico.

@@ -1,0 +1,208 @@
+Date: 04/Aug/1995
+Total Requests: 59002
+Total MB Transferred: 1055.43 MB
+
+Requests per Hour:
+      Requests  MB Transferred
+hour                          
+00        1205       28.124757
+01        1697       37.524561
+02        1109       21.076313
+03        1202       22.869098
+04        1120       20.617685
+05        1183       22.327075
+06        1433       23.694107
+07        1844       25.949123
+08        2805       36.295201
+09        3258       54.924663
+10        4042       78.048044
+11        3481       64.992620
+12        3817       58.051014
+13        4374       72.780930
+14        3523       60.439627
+15        4016       64.169367
+16        4576       95.880010
+17        2948       62.296519
+18        2379       41.612289
+19        2111       43.033148
+20        1923       35.573684
+21        1658       29.313035
+22        1643       27.944279
+23        1655       27.894166
+
+Request Types:
+method
+GET     58801
+HEAD      197
+POST        4
+
+Response Codes:
+status
+200    54245
+304     4026
+302      731
+
+Total Errors: 0
+Error Percentage: 0.00%
+
+File Types Accessed:
+0
+gif         35120
+html        12190
+xbm          1957
+jpg          1430
+txt           794
+mpg           618
+htm           594
+pl            591
+GIF           516
+jpeg          102
+wav            89
+JPG            25
+eps             7
+perl            5
+ksc             5
+pdf             5
+WAV             5
+map             3
+jsc             1
+art             1
+orig            1
+bmp             1
+software        1
+dat             1
+html1           1
+doc             1
+
+Top 50 Pages Accessed:
+page
+/images/NASA-logosmall.gif                             3320
+/images/MOSAIC-logosmall.gif                           2648
+/images/USA-logosmall.gif                              2647
+/images/WORLD-logosmall.gif                            2611
+/images/ksclogo-medium.gif                             2555
+/images/KSC-logosmall.gif                              2541
+/ksc.html                                              1773
+/                                                      1337
+/history/apollo/images/apollo-logo1.gif                1224
+/images/launch-logo.gif                                1118
+/images/ksclogosmall.gif                               1024
+/shuttle/missions/sts-69/count69.gif                    845
+/shuttle/countdown/                                     805
+/shuttle/missions/missions.html                         704
+/images/launchmedium.gif                                637
+/shuttle/missions/sts-69/sts-69-patch-small.gif         629
+/shuttle/missions/sts-69/mission-sts-69.html            626
+/icons/menu.xbm                                         521
+/icons/blank.xbm                                        511
+/history/apollo/images/apollo-small.gif                 444
+/history/apollo/images/footprint-logo.gif               430
+/icons/image.xbm                                        424
+/history/history.html                                   383
+/history/apollo/images/footprint-small.gif              372
+/history/apollo/apollo.html                             368
+/htbin/cdt_main.pl                                      360
+/images/                                                354
+/history/apollo/apollo-13/apollo-13.html                332
+/images/construct.gif                                   320
+/software/winvn/winvn.html                              318
+/images/shuttle-patch-logo.gif                          295
+/history/apollo/apollo-13/apollo-13-patch-small.gif     289
+/shuttle/countdown/video/livevideo2.gif                 278
+/software/winvn/winvn.gif                               269
+/software/winvn/wvsmall.gif                             263
+/software/winvn/bluemarb.gif                            261
+/shuttle/technology/sts-newsref/stsref-toc.html         242
+/images/kscmap-tiny.gif                                 235
+/shuttle/missions/sts-71/sts-71-patch-small.gif         227
+/icons/unknown.xbm                                      220
+/shuttle/resources/orbiters/orbiters-logo.gif           216
+/shuttle/countdown/images/countclock.gif                209
+/shuttle/missions/sts-70/sts-70-patch-small.gif         189
+/shuttle/missions/sts-69/images/images.html             188
+/images/shuttle-patch-small.gif                         186
+/shuttle/technology/sts-newsref/sts_asm.html            186
+/shuttle/missions/sts-69/movies/movies.html             185
+/shuttle/countdown/liftoff.html                         182
+/icons/text.xbm                                         180
+/history/apollo/images/apollo-logo.gif                  174
+
+Top 50 Hosts Accessing:
+host
+163.205.156.16                        354
+www-proxy.crl.research.digital.com    352
+piweba5y.prodigy.com                  331
+sdn_b6_f02_ip.dny.rockwell.com        324
+news.ti.com                           277
+www-relay.pa-x.dec.com                273
+edams.ksc.nasa.gov                    252
+gvls2.vfl.paramax.com                 188
+163.206.89.4                          186
+bussey.physics.fsu.edu                186
+king.opt-sci.arizona.edu              185
+unifex.ksc.nasa.gov                   183
+dns.it.net                            182
+www-c1.proxy.aol.com                  165
+bbcc-123.tamu.edu                     162
+www-b4.proxy.aol.com                  161
+poppy.hensa.ac.uk                     156
+piweba3y.prodigy.com                  152
+www-c3.proxy.aol.com                  148
+mac144.ma.psu.edu                     146
+pfizergate.pfizer.com                 146
+ppp09-08.rns.tamu.edu                 144
+gn2.getnet.com                        141
+mpngate1.ny.us.ibm.net                137
+vagrant.vf.mmc.com                    131
+sloanmac21.mit.edu                    129
+www-c4.proxy.aol.com                  129
+gw2.att.com                           126
+u139.n72.queensu.ca                   124
+palona1.cns.hp.com                    122
+nd006102.global.medtronic.com         121
+piweba4y.prodigy.com                  119
+keyhole.es.dupont.com                 113
+www-a2.proxy.aol.com                  113
+www-d1.proxy.aol.com                  112
+128.158.49.39                         112
+www-d3.proxy.aol.com                  111
+www-b3.proxy.aol.com                  111
+163.205.16.75                         110
+bocagate.bocaraton.ibm.com            110
+cliffy.lfwc.lockheed.com              110
+163.206.51.89                         107
+anomaly.bu.edu                        107
+jbalboni.arc.nasa.gov                 107
+www-c6.proxy.aol.com                  106
+ka137011.ksc.nasa.gov                 106
+www-c2.proxy.aol.com                  105
+arc.dental.upenn.edu                  104
+tiber.gsfc.nasa.gov                   104
+bbriggs.sp.trw.com                    102
+
+Top 5 Hosts Accessing:
+host
+163.205.156.16                        354
+www-proxy.crl.research.digital.com    352
+piweba5y.prodigy.com                  331
+sdn_b6_f02_ip.dny.rockwell.com        324
+news.ti.com                           277
+
+Top 5 Pages Accessed:
+page
+/images/NASA-logosmall.gif      3320
+/images/MOSAIC-logosmall.gif    2648
+/images/USA-logosmall.gif       2647
+/images/WORLD-logosmall.gif     2611
+/images/ksclogo-medium.gif      2555
+Busiest Hour: 16
+Busiest Day: 04/Aug/1995
+
+
+### Funzione 'Requests per Hour': Mostra come sono distribuite le richieste durante le varie ore del giorno.
+### Funzione 'Request Types': Mostra la distribuzione dei metodi HTTP (GET, POST, PUT, ecc.) per il giorno.
+### Funzione 'Response Codes': Mostra la distribuzione dei codici di risposta HTTP (200, 404, 500, ecc.) per il giorno.
+### Funzione 'Error Percentage': Calcola e mostra la percentuale di richieste con errori (status >= 400).
+### Funzione 'Top Pages Accessed': Mostra le 50 pagine più richieste nel giorno specificato.
+### Funzione 'Top Hosts Accessing': Mostra gli 50 host con il numero maggiore di richieste nel giorno.
+### Funzione 'Top Hosts and Pages': Mostra gli host e le pagine più visitate per identificare tendenze di traffico.

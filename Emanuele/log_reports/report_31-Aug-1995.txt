@@ -1,0 +1,207 @@
+Date: 31/Aug/1995
+Total Requests: 88930
+Total MB Transferred: 1355.08 MB
+
+Requests per Hour:
+      Requests  MB Transferred
+hour                          
+00        2508       50.421500
+01        2006       29.641541
+02        2192       35.411776
+03        1993       30.892599
+04        2137       25.876540
+05        1957       27.556072
+06        2655       27.423660
+07        4493       45.140065
+08        4767       67.881589
+09        5546       89.247957
+10        6205       91.532505
+11        6268      101.212713
+12        5541       83.280684
+13        5892       83.945017
+14        5429       92.194724
+15        5353       79.778801
+16        3853       48.590453
+17        3690       63.642130
+18        3142       57.328410
+19        2884       46.939457
+20        2714       48.803504
+21        2410       39.662419
+22        2873       44.325130
+23        2422       44.351201
+
+Request Types:
+method
+GET     88736
+HEAD      192
+POST        2
+
+Response Codes:
+status
+200    74458
+304    12413
+302     2059
+
+Total Errors: 0
+Error Percentage: 0.00%
+
+File Types Accessed:
+0
+gif         51596
+html        17391
+pl           6304
+xbm          1881
+jpg          1131
+mpg           834
+jpeg          746
+txt           667
+GIF           461
+htm           448
+wav            32
+bps            22
+JPG            22
+WAV            15
+pdf             5
+bak             4
+ksc             3
+map             3
+software        1
+doc             1
+good            1
+zip             1
+exe             1
+91              1
+orig            1
+
+Top 50 Pages Accessed:
+page
+/images/NASA-logosmall.gif                                      8360
+/images/KSC-logosmall.gif                                       4053
+/htbin/cdt_main.pl                                              3746
+/images/MOSAIC-logosmall.gif                                    3379
+/images/USA-logosmall.gif                                       3348
+/images/WORLD-logosmall.gif                                     3314
+/images/ksclogo-medium.gif                                      3163
+/shuttle/countdown/images/countclock.gif                        2482
+/htbin/cdt_clock.pl                                             2453
+/ksc.html                                                       2140
+/shuttle/missions/sts-69/count69.gif                            2084
+/shuttle/countdown/                                             1869
+/shuttle/countdown/liftoff.html                                 1660
+/history/apollo/images/apollo-logo1.gif                         1593
+/                                                               1564
+/shuttle/missions/sts-69/endeavour-pad-prelaunch-8-31-95.gif    1547
+/images/launch-logo.gif                                         1539
+/images/ksclogosmall.gif                                        1380
+/shuttle/missions/sts-69/sts-69-patch-small.gif                 1197
+/shuttle/missions/sts-69/mission-sts-69.html                    1138
+/shuttle/missions/missions.html                                 1023
+/images/launchmedium.gif                                         930
+/shuttle/countdown/video/livevideo.jpeg                          662
+/shuttle/countdown/countdown.html                                498
+/icons/menu.xbm                                                  495
+/icons/blank.xbm                                                 490
+/software/winvn/winvn.html                                       487
+/shuttle/technology/sts-newsref/sts-lcc.html                     486
+/shuttle/missions/sts-69/liftoff.html                            470
+/shuttle/missions/sts-69/images/images.html                      438
+/software/winvn/winvn.gif                                        432
+/software/winvn/bluemarb.gif                                     413
+/software/winvn/wvsmall.gif                                      408
+/icons/image.xbm                                                 392
+/images/shuttle-patch-logo.gif                                   383
+/shuttle/missions/sts-69/movies/movies.html                      369
+/history/history.html                                            360
+/history/apollo/images/apollo-small.gif                          334
+/images/launch-small.gif                                         332
+/history/apollo/images/footprint-logo.gif                        326
+/history/apollo/images/footprint-small.gif                       319
+/shuttle/technology/sts-newsref/stsref-toc.html                  307
+/shuttle/resources/orbiters/orbiters-logo.gif                    302
+/history/apollo/apollo.html                                      301
+/shuttle/countdown/video/sts-69-prelaunch-pad.gif                278
+/icons/text.xbm                                                  262
+/images/kscmap-tiny.gif                                          254
+/shuttle/missions/sts-71/sts-71-patch-small.gif                  236
+/images/shuttle-patch-small.gif                                  232
+/images/                                                         219
+
+Top 50 Hosts Accessing:
+host
+beta.xerox.com                       950
+goose.sms.fi                         812
+euas65.eua.ericsson.se               532
+silver.sms.fi                        512
+gwa.ericsson.com                     510
+x400.chalmers.se                     490
+reddragon.ksc.nasa.gov               478
+proxy.iijnet.or.jp                   431
+edams.ksc.nasa.gov                   405
+alpc6.mpimf-heidelberg.mpg.de        379
+pobox.cscs.ch                        302
+193.143.192.106                      300
+erigate.ericsson.se                  278
+piweba3y.prodigy.com                 267
+204.161.9.51                         266
+gateway.dhi.dk                       258
+renoir.nlp.physik.th-darmstadt.de    257
+163.206.89.4                         257
+141.42.25.1                          239
+piweba5y.prodigy.com                 234
+128.159.76.128                       208
+vagrant.vf.mmc.com                   206
+ruperts.bt-sys.bt.co.uk              192
+152.120.98.227                       183
+mpngate1.ny.us.ibm.net               179
+intgate.raleigh.ibm.com              176
+ousrvr2.oulu.fi                      173
+www-a2.proxy.aol.com                 169
+vdwalta.sabc.co.za                   169
+bocagate.bocaraton.ibm.com           164
+webgate1.mot.com                     162
+popov.dt.takuma-ct.ac.jp             156
+pinta.csee.usf.edu                   153
+warm2.mobius.provo.novell.com        152
+poppy.hensa.ac.uk                    149
+palona1.cns.hp.com                   148
+piweba2y.prodigy.com                 146
+www-e4.proxy.aol.com                 143
+spui-04.denhaag.dataweb.nl           135
+www-e9.proxy.aol.com                 133
+198.211.247.254                      133
+www-b3.proxy.aol.com                 133
+www-relay.pa-x.dec.com               131
+core.exp.interop.net                 129
+160.205.119.27                       126
+e659229.boeing.com                   126
+asd05-05.dial.xs4all.nl              125
+chronos.synopsys.com                 123
+gw3.att.com                          122
+www-d2.proxy.aol.com                 121
+
+Top 5 Hosts Accessing:
+host
+beta.xerox.com            950
+goose.sms.fi              812
+euas65.eua.ericsson.se    532
+silver.sms.fi             512
+gwa.ericsson.com          510
+
+Top 5 Pages Accessed:
+page
+/images/NASA-logosmall.gif      8360
+/images/KSC-logosmall.gif       4053
+/htbin/cdt_main.pl              3746
+/images/MOSAIC-logosmall.gif    3379
+/images/USA-logosmall.gif       3348
+Busiest Hour: 11
+Busiest Day: 31/Aug/1995
+
+
+### Funzione 'Requests per Hour': Mostra come sono distribuite le richieste durante le varie ore del giorno.
+### Funzione 'Request Types': Mostra la distribuzione dei metodi HTTP (GET, POST, PUT, ecc.) per il giorno.
+### Funzione 'Response Codes': Mostra la distribuzione dei codici di risposta HTTP (200, 404, 500, ecc.) per il giorno.
+### Funzione 'Error Percentage': Calcola e mostra la percentuale di richieste con errori (status >= 400).
+### Funzione 'Top Pages Accessed': Mostra le 50 pagine più richieste nel giorno specificato.
+### Funzione 'Top Hosts Accessing': Mostra gli 50 host con il numero maggiore di richieste nel giorno.
+### Funzione 'Top Hosts and Pages': Mostra gli host e le pagine più visitate per identificare tendenze di traffico.

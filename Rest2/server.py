@@ -1,5 +1,5 @@
 from flask import Flask, json, request
-from myjson import JsonSerialize,JsonDeserialize
+from esame.myjson import JsonSerialize,JsonDeserialize
 import sys
 
 # lListaCampil = ["nome", "cognome", "data nascita", "codice fiscale"]

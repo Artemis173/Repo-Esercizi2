@@ -1,0 +1,202 @@
+Date: 12/Aug/1995
+Total Requests: 37676
+Total MB Transferred: 659.65 MB
+
+Requests per Hour:
+      Requests  MB Transferred
+hour                          
+00        1477       23.811571
+01        1200       16.785787
+02         748        8.882557
+03         742       15.046340
+04         929       17.988018
+05         815       14.608611
+06         797       13.461370
+07         837       13.828115
+08         993       16.085216
+09        1159       16.421701
+10        2022       33.469533
+11        1791       30.643680
+12        1585       27.091057
+13        2055       42.000700
+14        1769       31.352489
+15        2117       37.767850
+16        2060       42.752158
+17        2288       41.944475
+18        1997       36.728368
+19        1832       24.787633
+20        2004       33.967585
+21        1791       30.693994
+22        2361       43.297023
+23        2307       46.238737
+
+Request Types:
+method
+GET     37627
+HEAD       48
+POST        1
+
+Response Codes:
+status
+200    33548
+304     3389
+302      739
+
+Total Errors: 0
+Error Percentage: 0.00%
+
+File Types Accessed:
+0
+gif      21752
+html      8159
+xbm       1460
+jpg        691
+txt        471
+pl         421
+mpg        419
+GIF        365
+htm        282
+jpeg        52
+wav         31
+JPG         22
+map          2
+perl         1
+WAV          1
+bak          1
+avi          1
+eps          1
+html1        1
+winvn        1
+
+Top 50 Pages Accessed:
+page
+/images/KSC-logosmall.gif                              2025
+/images/NASA-logosmall.gif                             1871
+/images/MOSAIC-logosmall.gif                           1257
+/images/USA-logosmall.gif                              1246
+/images/WORLD-logosmall.gif                            1233
+/images/ksclogo-medium.gif                             1155
+/history/apollo/images/apollo-logo1.gif                1050
+/images/launch-logo.gif                                 986
+/shuttle/countdown/                                     807
+/                                                       783
+/shuttle/missions/sts-69/count69.gif                    781
+/shuttle/missions/sts-69/mission-sts-69.html            729
+/images/ksclogosmall.gif                                700
+/shuttle/missions/sts-69/sts-69-patch-small.gif         696
+/shuttle/missions/missions.html                         627
+/ksc.html                                               579
+/images/launchmedium.gif                                536
+/icons/blank.xbm                                        381
+/icons/menu.xbm                                         378
+/icons/image.xbm                                        346
+/images/                                                325
+/history/history.html                                   272
+/software/winvn/winvn.html                              270
+/history/apollo/images/footprint-small.gif              267
+/images/construct.gif                                   252
+/history/apollo/images/apollo-small.gif                 250
+/shuttle/countdown/video/livevideo2.gif                 247
+/software/winvn/winvn.gif                               236
+/history/apollo/apollo.html                             234
+/history/apollo/images/footprint-logo.gif               229
+/shuttle/resources/orbiters/orbiters-logo.gif           221
+/software/winvn/wvsmall.gif                             220
+/software/winvn/bluemarb.gif                            220
+/icons/unknown.xbm                                      216
+/htbin/cdt_main.pl                                      214
+/images/kscmap-tiny.gif                                 200
+/shuttle/missions/sts-69/images/images.html             186
+/history/apollo/apollo-13/apollo-13.html                177
+/images/shuttle-patch-logo.gif                          176
+/shuttle/technology/sts-newsref/stsref-toc.html         173
+/shuttle/missions/sts-69/movies/movies.html             171
+/shuttle/countdown/images/countclock.gif                168
+/history/apollo/apollo-13/apollo-13-patch-small.gif     155
+/htbin/cdt_clock.pl                                     149
+/shuttle/resources/orbiters/endeavour.html              142
+/shuttle/missions/sts-69/liftoff.html                   138
+/shuttle/missions/sts-71/sts-71-patch-small.gif         137
+/facilities/lc39a.html                                  135
+/images/shuttle-patch-small.gif                         126
+/shuttle/countdown/liftoff.html                         126
+
+Top 50 Hosts Accessing:
+host
+206.27.25.1             514
+129.239.68.160          327
+198.83.19.44            312
+169.197.3.135           238
+152.163.192.5           225
+152.163.192.69          204
+198.83.19.47            196
+152.163.192.71          192
+152.163.192.70          190
+152.163.192.67          187
+152.163.192.35          185
+198.83.19.43            183
+169.197.3.34            156
+152.163.192.66          152
+199.201.186.104         144
+152.163.192.2           143
+152.163.192.38          138
+152.163.192.3           138
+198.83.19.40            136
+198.93.136.116          132
+152.163.192.4           128
+38.10.225.80            124
+129.79.254.191          118
+198.83.19.42            118
+152.163.192.36          118
+163.205.33.9            116
+152.163.192.7           113
+199.4.118.150           113
+130.132.25.94           105
+192.70.76.20            101
+169.152.79.3             98
+152.163.192.37           98
+198.60.30.14             95
+www-d1.proxy.aol.com     94
+192.58.206.21            92
+130.74.166.32            91
+152.163.192.68           90
+148.241.24.12            89
+141.142.12.168           89
+167.167.20.25            88
+158.152.1.40             88
+128.118.30.31            87
+134.176.2.11             84
+165.164.140.191          83
+129.7.55.99              79
+165.91.120.45            78
+152.163.192.6            76
+204.50.1.110             76
+130.54.39.80             75
+205.151.118.29           74
+
+Top 5 Hosts Accessing:
+host
+206.27.25.1       514
+129.239.68.160    327
+198.83.19.44      312
+169.197.3.135     238
+152.163.192.5     225
+
+Top 5 Pages Accessed:
+page
+/images/KSC-logosmall.gif       2025
+/images/NASA-logosmall.gif      1871
+/images/MOSAIC-logosmall.gif    1257
+/images/USA-logosmall.gif       1246
+/images/WORLD-logosmall.gif     1233
+Busiest Hour: 22
+Busiest Day: 12/Aug/1995
+
+
+### Funzione 'Requests per Hour': Mostra come sono distribuite le richieste durante le varie ore del giorno.
+### Funzione 'Request Types': Mostra la distribuzione dei metodi HTTP (GET, POST, PUT, ecc.) per il giorno.
+### Funzione 'Response Codes': Mostra la distribuzione dei codici di risposta HTTP (200, 404, 500, ecc.) per il giorno.
+### Funzione 'Error Percentage': Calcola e mostra la percentuale di richieste con errori (status >= 400).
+### Funzione 'Top Pages Accessed': Mostra le 50 pagine più richieste nel giorno specificato.
+### Funzione 'Top Hosts Accessing': Mostra gli 50 host con il numero maggiore di richieste nel giorno.
+### Funzione 'Top Hosts and Pages': Mostra gli host e le pagine più visitate per identificare tendenze di traffico.
