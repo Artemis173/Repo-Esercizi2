@@ -223,7 +223,7 @@ def show_items():
     return render_template('dynamic.html', items=items)
 
 
-myip = "10.8.0.38"
+myip = "10.8.0.94"
 myport = 8888
 
 if __name__ == '__main__':
