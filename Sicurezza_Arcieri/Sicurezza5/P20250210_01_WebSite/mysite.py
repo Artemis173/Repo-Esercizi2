@@ -53,11 +53,19 @@ def init_db():
 
     db.commit()
 
+listaQuery=[]
 
 @app.before_request
 def initialize():
     """Initialize the database before the first request."""
     init_db()
+    #Mi costruisco una lista di query
+    #SELECT * FROM users WHERE username = "aaa" and password="aaa"
+    # db = get_db()
+    # users=db.execute("select username, password from users").fetchall()
+    # for item in users:
+    #     listaQuery.append('select * from users where username="'+item['username']+'" and password="' + item["password"] + '";')
+    
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -124,13 +132,27 @@ def login():
         password = request.form['password']
         db = get_db()
 
-        user = db.execute(
-            'SELECT * FROM users WHERE username = ?',
-            (username,)
-        ).fetchone()
+
+        sql = 'SELECT * FROM users WHERE username = "' + username + '" and password="' + password + '"'
+
+        # # è sufficiente che la stringa sql sia in listaQuery
+        # if sql.lower() in listaQuery:
+        #     #Utente presente!!!
+        #     print("Presente!")
+        
+        # sql = 'SELECT * FROM users WHERE username = "' + '" or 1=1 --' + '" and password="' + password + '"'
+
+        # sql = 'SELECT * FROM users WHERE username = ? and password = ?'
+
+#SELECT * FROM users WHERE username = "" or 1=1 or username = "a" and password="asdasd"
+    
+        print(request.form)
+        print(sql)
+        #user = db.execute(sql, (username, password)).fetchone()
+        user = db.execute(sql).fetchone()
 
         # Validate user credentials
-        if user and user['password']==password:
+        if user: # and user['password']==password:
             # Store user info in session
             session['user_id'] = user['id']
             session['username'] = user['username']
@@ -201,7 +223,7 @@ def show_items():
     return render_template('dynamic.html', items=items)
 
 
-myip = "192.168.122.1" # da cambiare
+myip = "10.8.0.38"
 myport = 8888
 
 if __name__ == '__main__':
