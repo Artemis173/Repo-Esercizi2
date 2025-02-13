@@ -1,3 +1,19 @@
+'''
+per scoprire tutte le interfacce di rete della vostra macchina
+ip a | grep inet 
+
+per impostare un nuovo IP (vedi le slide)
+sudo ip addr add 192.168.101.10/24 dev eth0
+sudo ip addr add 192.168.101.2/24 dev eth0
+sudo ip addr add 192.168.150.2/24 dev eth0
+
+
+
+
+
+'''
+
+
 import sqlite3
 import os
 
@@ -224,7 +240,7 @@ def show_items():
 
 
 myip = "10.8.0.94"
-myport = 8888
+myport = 8087
 
 if __name__ == '__main__':
     with app.app_context():

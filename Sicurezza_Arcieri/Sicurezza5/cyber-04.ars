@@ -1,0 +1,15 @@
+// Inutile a meno che non si lanci il AppFw su due o più porte
+// DEFINE ipset caso01_ip = { *.*.*.*:30002 }; 
+
+DEFINE ipset tuttigli_ip = { *.*.*.*:* };
+
+DEFINE urlset api_url = { /api, /api*, /api/*/ }; // */
+DEFINE urlset abilita_url = { /abilita, /abilita*, /abilita/*/ }; // */
+
+DEFINE urlset abilitaEapi = { /api, /api*, /api/*/, /abilita, /abilita*, /abilita/*/ };
+
+DEFINE set utenti_bloccati_api = { "arcieri", "de cupis" };
+DEFINE set utenti_abilitati_abilita = { "dimitri" };
+
+DEFINE set utenti_trasferiti = { };
+
