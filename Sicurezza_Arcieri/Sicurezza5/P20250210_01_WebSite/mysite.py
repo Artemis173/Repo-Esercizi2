@@ -10,15 +10,38 @@ sudo ip a add 192.168.150.2/24 dev enp58s0u1u2
 Ricordate che nel progetto abbiamo impostato la
 porta 8087
 
+Per impostare mysql
+1) creare la cartella dei dati di mysql
+    
+    docker run --rm -e MYSQL_ROOT_PASSWORD=root -p 33306:3306 -v ./MySqlData/:/var/lib/mysql/ mysql:latest
+    sudo apt install mysql-client
+
+    mysql -h 127.0.0.1 -P 33306 -uroot -proot
+    
+    create database cyber05;
+    use cyber05;
+
+    CREATE TABLE users (
+        id SERIAL,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL );
+    CREATE TABLE items (
+        id SERIAL,
+        name VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL );
+
+    insert into items (name, description) values ("pixel9 pro", "latest high cost from google");
+    insert into items (name, description) values ("pixel9", "latest low cost from google");
+
 """
 
 import os
 import sqlite3
+import pymysql
 
 from flask import Flask, request, g, redirect, url_for, render_template, session, flash
 
 
-DATABASE = 'users.db'
 SECRET_KEY = 'AAA'  # Replace with your own secret key.
 
 app = Flask(__name__)
@@ -29,10 +52,20 @@ def get_db():
     Open a new database connection if there is none yet for the current application context.
     """
     if 'db' not in g:
-        g.db = sqlite3.connect(DATABASE)
+# Connect to MySQL
+        g.db = pymysql.connect(
+            host="127.0.0.1",
+            user="root",
+            port=33306,
+            password="root",
+            database="cyber05",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        # g.db = sqlite3.connect(DATABASE)
         # Return rows as dictionaries
-        g.db.row_factory = sqlite3.Row
-    return g.db
+        # g.db.row_factory = sqlite3.Row
+        g.cursor = g.db.cursor()
+    return g.cursor, g.db
 
 
 @app.teardown_appcontext
@@ -40,32 +73,23 @@ def close_db(error):
     """
     Closes the database connection at the end of the request.
     """
+    cursor = g.pop('cursor', None)
+    if cursor is not None:
+        cursor.close()
     db = g.pop('db', None)
     if db is not None:
         db.close()
 
-
 def init_db():
     """Create user table if it doesn't exist."""
-    db = get_db()
+    db, conn = get_db()
     db.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
-        )
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL );
     ''')
-    
-    # create items table if not exists
-    db.execute('''
-        CREATE TABLE IF NOT EXISTS items (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            description TEXT
-        )
-    ''')
-
-    db.commit()
+    conn.commit()
 
 listaQuery=[]
 
@@ -87,13 +111,11 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
-
+        db, conn = get_db()
+        
         # Check if user already exists
-        existing_user = db.execute(
-            'SELECT * FROM users WHERE username = ?',
-            (username,)
-        ).fetchone()
+        db.execute(f"SELECT * FROM users WHERE username = '{username}'")
+        existing_user = db.fetchall()
 
         if existing_user:
             flash("Username already taken, please choose another.", "error")
@@ -101,10 +123,8 @@ def register():
 
         # Hash and store the new user’s password
         db.execute(
-            'INSERT INTO users (username, password) VALUES (?, ?)',
-            (username, password)
-        )
-        db.commit()
+            f"INSERT INTO users (username, password) VALUES ('{username}', '{password}')")
+        conn.commit()
 
         flash("Registration successful! You can now log in.", "success")
         return redirect(url_for('login'))
@@ -121,9 +141,9 @@ def add_item():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
-        db = get_db()
-        db.execute("INSERT INTO items (name, description) VALUES (?, ?)", (name, description))
-        db.commit()
+        db, conn = get_db()
+        db.execute(f"INSERT INTO items (name, description) VALUES ('{name}', '{description}')")
+        conn.commit()
         flash("Item added!", "success")
         return redirect(url_for('show_items'))
 
@@ -144,10 +164,10 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
+        db, conn = get_db()
 
 
-        sql = 'SELECT * FROM users WHERE username = "' + username + '" and password="' + password + '"'
+        sql = f"SELECT * FROM users WHERE username='{username}' and password='{password}'"
 
         # # è sufficiente che la stringa sql sia in listaQuery
         # if sql.lower() in listaQuery:
@@ -163,13 +183,16 @@ def login():
         print(request.form)
         print(sql)
         #user = db.execute(sql, (username, password)).fetchone()
-        user = db.execute(sql).fetchone()
+        db.execute(sql)
+        user=db.fetchall()
+        if user:
+            user=user[0]
 
         # Validate user credentials
         if user: # and user['password']==password:
             # Store user info in session
-            session['user_id'] = user['id']
-            session['username'] = user['username']
+            session['user_id'] = user["username"]
+            session['username'] = user["password"]
             
             flash("Login successful!", "success")
             return redirect(url_for('protected_page'))
@@ -231,8 +254,9 @@ def show_items():
         flash("You must be logged in to view items.", "warning")
         return redirect(url_for('login'))
 
-    db = get_db()
-    items = db.execute("SELECT * FROM items").fetchall()
+    db, conn = get_db()
+    db.execute("SELECT * FROM items")
+    items = db.fetchall()
 
     return render_template('dynamic.html', items=items)
 
