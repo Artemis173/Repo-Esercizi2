@@ -8,7 +8,6 @@
 //     sudo ip addr add $i/255.255.255.0 dev enp58s0u1u2
 // done
 
-// Modifica
 
 DEFINE ipset any_ip = { *.*.*.*:* };
 DEFINE set userpwd = { "aaaaaa", "bbbccc" }; //concatenazione di username e password del DB utenti
