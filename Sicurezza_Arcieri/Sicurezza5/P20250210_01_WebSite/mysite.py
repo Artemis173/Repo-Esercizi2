@@ -1,21 +1,19 @@
-'''
+"""
 per scoprire tutte le interfacce di rete della vostra macchina
-ip a | grep inet 
+ip a | grep inet
 
-per impostare un nuovo IP (vedi le slide)
-sudo ip addr add 192.168.101.10/24 dev eth0
-sudo ip addr add 192.168.101.2/24 dev eth0
-sudo ip addr add 192.168.150.2/24 dev eth0
+per impostare un IP nuovo (vedi le slide)
+sudo ip a add 192.168.101.10/24 dev enp58s0u1u2
+sudo ip a add 192.168.101.2/24 dev enp58s0u1u2
+sudo ip a add 192.168.150.2/24 dev enp58s0u1u2
 
+Ricordate che nel progetto abbiamo impostato la
+porta 8087
 
+"""
 
-
-
-'''
-
-
-import sqlite3
 import os
+import sqlite3
 
 from flask import Flask, request, g, redirect, url_for, render_template, session, flash
 
@@ -239,7 +237,7 @@ def show_items():
     return render_template('dynamic.html', items=items)
 
 
-myip = "10.8.0.94"
+myip = "192.168.101.10"
 myport = 8087
 
 if __name__ == '__main__':

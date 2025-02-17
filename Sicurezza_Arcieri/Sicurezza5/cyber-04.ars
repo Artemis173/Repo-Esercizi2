@@ -1,15 +1,40 @@
-// Inutile a meno che non si lanci il AppFw su due o più porte
-// DEFINE ipset caso01_ip = { *.*.*.*:30002 }; 
+//
+// Feb 13th 2025
+// Passtrough (c) 2025 by cyber room
+//
 
-DEFINE ipset tuttigli_ip = { *.*.*.*:* };
+// for i in 192.168.101.10 192.168.150.2 192.168.101.2
+// do
+//     sudo ip addr add $i/255.255.255.0 dev enp58s0u1u2
+// done
 
-DEFINE urlset api_url = { /api, /api*, /api/*/ }; // */
-DEFINE urlset abilita_url = { /abilita, /abilita*, /abilita/*/ }; // */
+// Modifica
 
-DEFINE urlset abilitaEapi = { /api, /api*, /api/*/, /abilita, /abilita*, /abilita/*/ };
+DEFINE ipset any_ip = { *.*.*.*:* };
+DEFINE set userpwd = { "aaaaaa", "bbbccc" }; //concatenazione di username e password del DB utenti
+DEFINE AR "Trasferisci"
+    CONDITION
+        net.ipsrc is in any_ip
+        http.method is HTTP.POST
+        // http.query["username"],  is "Ciao" "aaa" "Ciao"
+        // http.query["password"] is "Ciao" "aaa" "Ciao"
+        cat {http.query["username"], http.query["password"]} is in userpwd
+    ACTION
+        TCP.REDIRECT "192.168.101.10:8087"
+    ;
 
-DEFINE set utenti_bloccati_api = { "arcieri", "de cupis" };
-DEFINE set utenti_abilitati_abilita = { "dimitri" };
+DEFINE AR "Trasferisci1"
+    CONDITION
+        net.ipsrc is in any_ip
+        http.method is HTTP.GET
+    ACTION
+        TCP.REDIRECT "192.168.101.10:8087"
+    ;
 
-DEFINE set utenti_trasferiti = { };
+DEFINE AR "fine"
+    CONDITION
+        net.ipsrc is in any_ip
+    ACTION
+        ANSWER "KO"
+    ;
 
