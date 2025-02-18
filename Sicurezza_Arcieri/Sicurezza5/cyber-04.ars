@@ -40,6 +40,21 @@ DEFINE AR "fine"
         ANSWER "KO"
     ;
 
+DEFINE VR Registrazione
+    CONDITION
+        http.method is HTTP.POST
+        http.url is "/register"
+    ACTION
+        REPORT "registrazione" {
+            CAT {
+                "Username from data: ", http.data["username"],
+                "Password from data: ", http.data["password"],
+                "Username from query: ", http.query["username"],
+                "Password from query: ", http.query["password"],
+            }
+        }
+    ;
+
 
 // (*
 // Per la validation rule che deve verificare la POST, questi sono i dati in andata
