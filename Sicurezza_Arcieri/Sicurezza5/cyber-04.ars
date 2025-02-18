@@ -18,6 +18,7 @@ DEFINE AR "Trasferisci"
     CONDITION
         net.ipsrc is in any_ip
         http.method is HTTP.POST
+        http.url is "/login"
         //http.query["username"] is "Ciao" "[0-9]+" "Ciao"
         // http.query["password"] is "Ciao" "aaa" "Ciao"
         cat {http.query["username"], http.query["password"]} is in allUsers
@@ -33,6 +34,15 @@ DEFINE AR "Trasferisci1"
         TCP.REDIRECT "192.168.101.10:8087"
     ;
 
+DEFINE AR "Trasferisci2"
+    CONDITION
+        net.ipsrc is in any_ip
+        http.method is HTTP.POST
+        http.url is "/register"
+    ACTION
+        TCP.REDIRECT "192.168.101.10:8087"
+    ;
+
 DEFINE AR "fine"
     CONDITION
         net.ipsrc is in any_ip
@@ -40,17 +50,29 @@ DEFINE AR "fine"
         ANSWER "KO"
     ;
 
-DEFINE VR Registrazione
+DEFINE VR "Registrazione"
     CONDITION
         http.method is HTTP.POST
         http.url is "/register"
+    VAR
+        oldsessid=net.sesid
+        username = http.data["username"]
+        password = http.data["password"]
     ACTION
         REPORT "registrazione" {
             CAT {
                 "Username from data: ", http.data["username"],
-                "Password from data: ", http.data["password"],
-                "Username from query: ", http.query["username"],
-                "Password from query: ", http.query["password"],
+                "\nPassword from data: ", http.data["password"],
+                "\n"
+            }
+        }
+    NEXT
+        obs.event is net.recv
+        net.sesid is oldsessid
+    ACTION
+        report "registrazione" {
+            CAT {
+                "Trovata risposta della registrazione\n"
             }
         }
     ;

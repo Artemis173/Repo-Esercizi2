@@ -13,10 +13,10 @@ porta 8087
 Per impostare mysql
 1) creare la cartella dei dati di mysql
     
-    docker run --rm -e MYSQL_ROOT_PASSWORD=root -p 33306:3306 -v ./MySqlData/:/var/lib/mysql/ mysql:latest
+    docker run -it --rm -e MYSQL_ROOT_PASSWORD=root -p 12006:3306 -v ./MySqlData/:/var/lib/mysql/ mysql:latest
     sudo apt install mysql-client
 
-    mysql -h 127.0.0.1 -P 33306 -uroot -proot
+    mysql -h 127.0.0.1 -P 12006 -uroot -proot
     
     create database cyber05;
     use cyber05;
@@ -33,6 +33,9 @@ Per impostare mysql
     insert into items (name, description) values ("pixel9 pro", "latest high cost from google");
     insert into items (name, description) values ("pixel9", "latest low cost from google");
 
+    
+    al termine:
+    docker run -it --rm --network host -v ./:/vapps dozenapps/frextva:latest /bin/bash -c "cd /vapps; /va cyber-04.conf"
 """
 
 import os
@@ -131,6 +134,27 @@ def register():
 
     # GET request -> Show registration form
     return render_template('register.html')
+
+@app.route('/fill', methods=['GET'])
+def fill():
+    db, conn = get_db()
+    for i in range(1, 10000):
+        r = os.urandom(8)
+        name = f"User {r.hex()}"
+        password = f"Password {r.hex()}"
+        db.execute(f"INSERT INTO users (username, password) VALUES ('{name}', '{password}')")
+    conn.commit()
+    flash("10000000 items added!", "success")
+    return redirect(url_for('show_items'))
+
+@app.route('/getall', methods=['GET'])
+def getall():
+    db, conn = get_db()
+    db.execute("SELECT * FROM users")
+    items = db.fetchall()
+
+    return render_template('dynamicusers.html', items=items)
+
 
 @app.route('/add_item', methods=['GET', 'POST'])
 def add_item():
