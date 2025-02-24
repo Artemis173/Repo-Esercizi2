@@ -52,18 +52,32 @@ def calculate_png_length(filepath):
         
         return total_length
 
-def shift_cipher(text, shift):
+
+def xor_cipher(text, key):
+    """Esegui la decriptazione XOR sul testo con la chiave fornita."""
     result = ""
     for char in text:
-        if char.isalpha():  # Only shift letters
-            shift_base = ord('A') if char.isupper() else ord('a')
-            result += chr((ord(char) - shift_base + shift) % 26 + shift_base)
-        else:
-            result += char  # Keep spaces, numbers, and symbols unchanged
+        result += chr(ord(char) ^ key)
     return result
 
-# Implementazione compatta
-s=lambda t,s:''.join([chr((ord(c)-(o:=(ord('A') if c.isupper() else ord('a')))+s)%26+o)if c.isalpha()else c for c in t])
+def is_sensical(text):
+    """Verifica se il testo contiene parole di senso compiuto (usando un dizionario semplice)."""
+    valid_words = {"hello", "world", "this", "is", "a", "test", "message", "goodbye"}
+    words = text.split()
+    found_valid_words = sum(1 for word in words if word.lower() in valid_words)
+    
+    # Consideriamo sensato il testo se almeno il 30% delle parole sono valide
+    return found_valid_words / len(words) >= 0.3 if words else False
+
+def try_xor_decryption(text):
+    """Cerca la chiave XOR che rende il testo sensato."""
+    for key in range(256):  # Scansiona tutte le possibili chiavi da 0 a 255
+        decrypted_text = xor_cipher(text, key)
+        if is_sensical(decrypted_text):  # Se il testo decriptato ha senso
+            print(f"Found sensible text with key {key}: {decrypted_text}")
+            return decrypted_text
+    print("No valid decryption found.")
+    return None
 
 if __name__ == "__main__":
     def parse_arguments():
@@ -94,7 +108,14 @@ if __name__ == "__main__":
             with open(out, "wb") as f:
                 f.write(appended_data)
     
-    input_text = "Khoor, Zruog! "
-    shift_value = 23
-    encrypted_text = shift_cipher(input_text, shift_value)
+    # Test di decriptazione con XOR
+    input_text = "099:yu\x02:'91t"  # La tua stringa cifrata
+    encrypted_text = xor_cipher(input_text, 42)  # Cifriamo con una chiave (ad esempio 42)
     print(f"Encrypted text: {encrypted_text}")
+
+    # Proviamo a decriptare con tutte le chiavi
+    decrypted_text = try_xor_decryption(encrypted_text)
+    if decrypted_text:
+        print(f"Successfully decrypted: {decrypted_text}")
+    else:
+        print("Decryption failed.")
