@@ -18,13 +18,18 @@ class Character:
         self.gold = gold
 
     def heal(self):
-        heal_amount = random.randint(5, 15)
+        heal_amount = random.randint(5, 10)
         self.hp += heal_amount
         print(f"{self.name} si è curato e ora ha {self.hp} HP.")
 
-    def full_heal(self):
-        self.hp = 20  # Supponiamo che 20 sia il massimo HP
-        print(f"{self.name} è completamente guarito e ora ha {self.hp} HP.")
+    
+        # Aggiungere una nuova funzione per curare una percentuale fissa dell'HP
+    def heal_percentage(character, percentage=10):
+        heal_amount = character.hp * percentage // 100
+        character.hp += heal_amount
+        # Assicurati che l'HP non superi il massimo
+        character.hp = min(character.hp, 20)
+        print(f"{character.name} è curato del {percentage}% e ora ha {character.hp} HP.")
 
     def add_gold(self, amount):
         self.gold += amount
@@ -112,15 +117,33 @@ def combat(characters, monsters):
             print("Tutti i personaggi sono stati sconfitti!")
             return False
 
-# Generazione casuale delle stanze
+# Funzione per generare le stanze con i limiti richiesti
 def generate_rooms():
-    room_types = ["Stanza vuota", "Stanza del tesoro", "Stanza del mostro", "Stanza di ristoro rapido"]
-    rooms = random.choices(room_types, k=12)
+    room_types = ["Stanza vuota", "Stanza del tesoro", "Stanza del mostro", "Stanza di ristoro rapido", "Stanza degli artefatti"]
+
+    # Creiamo una lista di stanze, rispettando i limiti richiesti
+    rooms = []
+
+    # Aggiungi al massimo 1 "Stanza del tesoro"
     rooms.append("Stanza del tesoro")
-    rooms.append("Stanza del mostro con Re dei Goblin")
-    rooms.append("Stanza di ristoro rapido")
+
+    # Aggiungi al massimo 2 "Stanze vuote"
+    rooms += ["Stanza vuota"] * 2
+
+    # Aggiungi al massimo 2 "Stanze di ristoro rapido"
+    rooms += ["Stanza di ristoro rapido"] * 2
+
+    # Aggiungi al massimo 2 "Stanze degli artefatti"
+    rooms += ["Stanza degli artefatti"] * 2
+
+    # Aggiungi al massimo 10 "Stanze del mostro"
+    rooms += ["Stanza del mostro"] * (15 - len(rooms))  # Per arrivare a un totale di 15 stanze
+
+    # Mischia le stanze per renderle casuali
     random.shuffle(rooms)
+    
     return rooms
+
 
 # Generazione della mappa 10x10
 def generate_map():
@@ -132,7 +155,14 @@ def generate_map():
     dungeon_map[random.randint(0, 9)][random.randint(0, 9)] = "Stanza degli artefatti"
     return dungeon_map
 
-# Esplorazione delle stanze
+def heal_percentage(character, percentage=10):
+    heal_amount = character.hp * percentage // 100
+    character.hp += heal_amount
+    # Assicurati che l'HP non superi il massimo
+    character.hp = min(character.hp, 20)
+    print(f"{character.name} è curato del {percentage}% e ora ha {character.hp} HP.")
+
+# Funzione di esplorazione aggiornata con la cura nella "Stanza di ristoro rapido"
 def explore(characters):
     print("Esplorazione delle stanze:")
     directions = ["sinistra", "destra", "sopra", "sotto"]
@@ -150,7 +180,7 @@ def explore(characters):
         explored_rooms.add(current_position)
         print(f"Sei in una {room}.")
         
-        if room == "Stanza del mostro" or room == "Stanza del mostro con Re dei Goblin" and current_position not in explored_rooms:
+        if room == "Stanza del mostro" or room == "Stanza del mostro con Re dei Goblin":
             if room == "Stanza del mostro con Re dei Goblin":
                 monster = Monster("Re dei Goblin", 20, 15, 12, 10, [Equipment("Spada lunga", 3, 1), Equipment("Armatura", 0, 4)])
             else:
@@ -160,9 +190,17 @@ def explore(characters):
             if not combat(characters, monsters):
                 break
         
-        if room == "Stanza di ristoro rapido" and current_position not in explored_rooms:
+        # Aggiunta di oro nella stanza del tesoro
+        if room == "Stanza del tesoro" and current_position not in explored_rooms:
             for character in characters:
-                character.full_heal()
+                character.add_gold(100)  # Aggiungi oro ai personaggi
+        
+        # Cura nella stanza di ristoro rapido
+        if room == "Stanza di ristoro rapido" and current_position not in explored_rooms:
+            print("Sei entrato nella Stanza di Ristoro Rapido!")
+            for character in characters:
+                heal_percentage(character, 10)  # Cura il 10% della salute del personaggio
+
             roll = roll_dice(20)
             if roll <= 10:
                 print("Sei stato imboscato!") 
@@ -171,20 +209,18 @@ def explore(characters):
                 if not combat(characters, monsters):
                     break
         
-        if room == "Stanza del tesoro" and current_position not in explored_rooms:
-            for character in characters:
-                character.add_gold(100)
-        
         if room == "Stanza degli artefatti":
             for character in characters:
                 search_artifact(character)
         
+        # Logica per curare un personaggio se ha pochi HP
         for character in characters:
             if character.hp < 10:
                 heal_decision = input(f"{character.name} ha {character.hp} HP. Vuoi curarti? (s/n): ").lower()
                 if heal_decision == 's':
                     character.heal()
-        print("\npos: ",current_position)
+
+        print("\npos: ", current_position)
         direction = input("In quale direzione vuoi andare? (sinistra/destra/sopra/sotto): ").lower()
         if direction not in directions:
             print("Direzione non valida. Riprova.")

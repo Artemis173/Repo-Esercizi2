@@ -1,0 +1,77 @@
+# Aggiungere una nuova funzione per curare una percentuale fissa dell'HP
+def heal_percentage(character, percentage=10):
+    heal_amount = character.hp * percentage // 100
+    character.hp += heal_amount
+    # Assicurati che l'HP non superi il massimo
+    character.hp = min(character.hp, 20)
+    print(f"{character.name} è curato del {percentage}% e ora ha {character.hp} HP.")
+
+# Funzione di esplorazione aggiornata con cura del 10% in "Stanza di ristoro rapido"
+def explore(characters):
+    print("Esplorazione delle stanze:")
+    directions = ["sinistra", "destra", "sopra", "sotto"]
+    dungeon_map = generate_map()
+    explored_rooms = set()
+    current_position = (0, 0)
+    room_count = 0
+
+    while room_count < 15:
+        if current_position in explored_rooms:
+            print(f"Sei tornato in una stanza già conquistata.")
+            current_position = move_position(current_position, directions)
+        
+        room = dungeon_map[current_position[0]][current_position[1]]
+        explored_rooms.add(current_position)
+        print(f"Sei in una {room}.")
+        
+        if room == "Stanza del mostro" or room == "Stanza del mostro con Re dei Goblin" and current_position not in explored_rooms:
+            if room == "Stanza del mostro con Re dei Goblin":
+                monster = Monster("Re dei Goblin", 20, 15, 12, 10, [Equipment("Spada lunga", 3, 1), Equipment("Armatura", 0, 4)])
+            else:
+                monster = create_monster()
+            print(f"Un {monster.name} appare!")
+            monsters = [monster]
+            if not combat(characters, monsters):
+                break
+        
+        # Aggiunta della logica per "Stanza di ristoro rapido"
+        if room == "Stanza di ristoro rapido" and current_position not in explored_rooms:
+            for character in characters:
+                heal_percentage(character, 10)  # Cura del 10%
+            
+            roll = roll_dice(20)
+            if roll <= 10:
+                print("Sei stato imboscato!") 
+                monster = create_monster()
+                monsters = [monster]
+                if not combat(characters, monsters):
+                    break
+        
+        # Altri casi per le stanze (Stanza del tesoro, artefatti, ecc.)
+        if room == "Stanza del tesoro" and current_position not in explored_rooms:
+            for character in characters:
+                character.add_gold(100)
+        
+        if room == "Stanza degli artefatti":
+            for character in characters:
+                search_artifact(character)
+        
+        # Logica per curare un personaggio se ha pochi HP
+        for character in characters:
+            if character.hp < 10:
+                heal_decision = input(f"{character.name} ha {character.hp} HP. Vuoi curarti? (s/n): ").lower()
+                if heal_decision == 's':
+                    character.heal()
+
+        print("\npos: ", current_position)
+        direction = input("In quale direzione vuoi andare? (sinistra/destra/sopra/sotto): ").lower()
+        if direction not in directions:
+            print("Direzione non valida. Riprova.")
+        else:
+            current_position = move_position(current_position, direction)
+        
+        continue_exploring = input("Vuoi continuare ad esplorare? (s/n): ").lower()
+        if continue_exploring != 's':
+            break
+        
+        room_count += 1
