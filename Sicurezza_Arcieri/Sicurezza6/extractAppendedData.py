@@ -52,6 +52,27 @@ def calculate_png_length(filepath):
         
         return total_length
 
+def shift_cipher(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():  # Only shift letters
+            shift_base = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - shift_base + shift) % 26 + shift_base)
+        else:
+            result += char  # Keep spaces, numbers, and symbols unchanged
+    return result
+
+
+def xor_cipher(text, key):
+    result = ""
+    for char in text:
+        # Esegui l'operazione XOR tra il valore del carattere e la chiave
+        result += chr(ord(char) ^ key)
+    return result
+
+# Implementazione compatta
+s=lambda t,s:''.join([chr((ord(c)-(o:=(ord('A') if c.isupper() else ord('a')))+s)%26+o)if c.isalpha()else c for c in t])
+
 if __name__ == "__main__":
     def parse_arguments():
         parser = argparse.ArgumentParser(description="Calculate the length of a PNG file based on its chunk structure.")
@@ -80,3 +101,18 @@ if __name__ == "__main__":
             appended_data = f.read(actual_len - calculated_len)
             with open(out, "wb") as f:
                 f.write(appended_data)
+    
+    input_text = "Zhoor, Zruog! "
+    shift_value = 3
+    encrypted_text = shift_cipher(input_text, shift_value)
+    print(f"Encrypted text: {encrypted_text}")
+
+    input_text = "099:yu:'91t"
+    key = 40  # Puoi usare qualsiasi valore numerico come chiave di decriptazione
+
+    encrypted_text = xor_cipher(input_text, key)
+    print(f"Encrypted text: {encrypted_text}")
+
+    # Per decriptare XOR
+    decrypted_text = xor_cipher(encrypted_text, key)
+    print(f"Decrypted text: {decrypted_text}")
