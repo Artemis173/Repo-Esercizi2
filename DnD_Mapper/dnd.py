@@ -59,121 +59,136 @@ def roll_dice(sides):
     return random.randint(1, sides)
 
 def combat(characters, monsters):
-    turn = 0
-    while characters and monsters:
-        attacker = characters[turn % len(characters)] if turn % 2 == 0 else monsters[turn % len(monsters)]
-        defender = monsters[turn % len(monsters)] if turn % 2 == 0 else characters[turn % len(characters)]
-        
-        if attacker.hp > 0 and defender.hp > 0:
-            roll = roll_dice(20)
-            attack_bonus = sum(equip.attack_bonus for equip in attacker.equipment)  # Usato 'equipment' al posto di 'equip'
-            
-            if isinstance(attacker, Character):
-                if attacker.char_class == "Guerriero":
-                    attack_roll = roll + attacker.strength + attack_bonus
-                elif attacker.char_class == "Mago":
-                    attack_roll = roll + attacker.intelligence + attack_bonus
-                elif attacker.char_class == "Ladro":
-                    attack_roll = roll + attacker.dex + attack_bonus
-                else:
-                    attack_roll = roll + attacker.strength + attack_bonus
-            else:
-                attack_roll = roll + attacker.strength + attack_bonus
-            
-            if attack_roll > 10:  # Supponiamo che la Classe Armatura (CA) sia 10
-                damage = roll_dice(8)
-                defense_bonus = sum(equip.defense_bonus for equip in defender.equipment)  # Usato 'equipment' al posto di 'equip'
-                actual_damage = max(0, damage - defense_bonus)
-                defender.hp -= actual_damage
-                print(f"{attacker.name} attacca {defender.name} e infligge {actual_damage} danni!")
-                if defender.hp <= 0:
-                    print(f"{defender.name} è stato sconfitto!")
-                    if isinstance(defender, Monster):
-                        monsters.remove(defender)
-                    else:
-                        characters.remove(defender)
-            else:
-                print(f"{attacker.name} attacca {defender.name} ma manca!")
-        
-        turn += 1
-        
+    print("\n⚔️ Inizia il combattimento!")
+
+    while any(char.hp > 0 for char in characters) and any(mon.hp > 0 for mon in monsters):
+        # 🏹 Il gruppo attacca prima
+        print("\n🔥 Il gruppo attacca!")
+        for character in characters:
+            if character.hp > 0:
+                target = random.choice(monsters)  # Scegli un mostro casuale
+                attack(character, target)
+
+        # ☠️ Rimuove mostri sconfitti
+        monsters = [mon for mon in monsters if mon.hp > 0]
         if not monsters:
-            print("Tutti i mostri sono stati sconfitti!")
+            print("🎉 Il gruppo ha sconfitto tutti i mostri!")
             return True
-        elif not characters:
-            print("Tutti i personaggi sono stati sconfitti!")
+
+        # 💀 I mostri attaccano il gruppo
+        print("\n⚠️ I mostri attaccano!")
+        for monster in monsters:
+            target = random.choice(characters)  # Sceglie un eroe casuale
+            attack(monster, target)
+
+        # ☠️ Rimuove eroi sconfitti
+        characters = [char for char in characters if char.hp > 0]
+        if not characters:
+            print("❌ Il gruppo è stato sconfitto!")
             return False
+
+def attack(attacker, defender):
+    roll = roll_dice(20)
+    attack_bonus = sum(equip.attack_bonus for equip in attacker.equipment)
+
+    if isinstance(attacker, Character):
+        if attacker.char_class == "Guerriero":
+            attack_roll = roll + attacker.strength + attack_bonus
+        elif attacker.char_class == "Mago":
+            attack_roll = roll + attacker.intelligence + attack_bonus
+        elif attacker.char_class == "Ladro":
+            attack_roll = roll + attacker.dex + attack_bonus
+        else:
+            attack_roll = roll + attack_bonus
+    else:
+        attack_roll = roll + attacker.strength + attack_bonus
+
+    if attack_roll > 10:  # Supponiamo CA = 10
+        damage = roll_dice(8)
+        defense_bonus = sum(equip.defense_bonus for equip in defender.equipment)
+        actual_damage = max(0, damage - defense_bonus)
+        defender.hp -= actual_damage
+        print(f"{attacker.name} attacca {defender.name} e infligge {actual_damage} danni!")
+        if defender.hp <= 0:
+            print(f"💀 {defender.name} è stato sconfitto!")
+    else:
+        print(f"{attacker.name} attacca {defender.name} ma manca!")
 
 def print_character_status(character):
     print(f"{character.name}: HP: {character.hp}, Oro: {character.gold}")
 
 def explore(characters):
     directions = ["sinistra", "destra", "sopra", "sotto"]
-    dungeon_map = generate_map()  # Crea la mappa iniziale
-    explored_rooms = set()  # Set per memorizzare le stanze esplorate
+    dungeon_map = generate_map()  # Crea la mappa del dungeon
+    explored_rooms = set()  # Set per stanze esplorate
+    current_position = (0, 0)  # Posizione iniziale del gruppo
     room_count = 0
 
-    # Ogni personaggio esplora per 15 stanze (o finché non vogliono fermarsi)
     while room_count < 15:
-        for character in characters:
-            # Ogni personaggio esplora
-            print(f"\n{character.name} sta esplorando le stanze:")
-            current_position = (0, 0)  # Iniziamo dalla posizione (0, 0)
-            if current_position in explored_rooms:
-                print(f"{character.name} è tornato in una stanza già conquistata.")
-                # Sostituisci la stanza con una nuova stanza
-                dungeon_map = generate_map()
+        print("\n💠 Il gruppo esplora il dungeon...")
 
-            # Aggiungi la stanza alla lista di stanze esplorate
-            explored_rooms.add(current_position)
+        if current_position in explored_rooms:
+            print("🔄 Il gruppo è tornato in una stanza già esplorata.")
+        explored_rooms.add(current_position)
 
-            # Ottieni la stanza corrente dalla mappa
-            room = dungeon_map[current_position[0]][current_position[1]]
-            print(f"{character.name} è in una {room}.")
+        room = dungeon_map[current_position[0]][current_position[1]]
+        print(f"📍 Il gruppo è entrato in una {room}.")
 
-            # Gestione delle stanze speciali
-            if room == "Stanza del mostro" or room == "Stanza del mostro con Re dei Goblin":
-                if room == "Stanza del mostro con Re dei Goblin":
-                    monster = Monster("Re dei Goblin", 20, 15, 12, 10, [Equipment("Spada lunga", 3, 1), Equipment("Armatura", 0, 4)])
-                else:
-                    monster = create_monster()
-                print(f"Un {monster.name} appare!")
-                monsters = [monster]
-                if not combat([character], monsters):  # Passa solo il singolo personaggio per il combattimento
-                    break
+        # ⚔️ Stanza del mostro
+        if room in ["Stanza del mostro", "Stanza del mostro con Re dei Goblin"]:
+            if room == "Stanza del mostro con Re dei Goblin":
+                monster = Monster("Re dei Goblin", 20, 15, 12, 10, [Equipment("Spada lunga", 3, 1), Equipment("Armatura", 0, 4)])
+            else:
+                monster = create_monster()
 
-            if room == "Stanza del tesoro":
-                character.add_gold(100)  # Aggiungi oro al personaggio
+            print(f"⚠️ Un {monster.name} appare!")
+            monsters = [monster]
 
-            if room == "Stanza di ristoro rapido":
-                print(f"{character.name} è entrato nella Stanza di Ristoro Rapido!")
+            # Il gruppo combatte unito
+            if not combat(characters, monsters):
+                print("❌ Il gruppo è stato sconfitto. Fine esplorazione.")
+                break  # Se il gruppo perde, si interrompe l'esplorazione
+
+        # 💰 Stanza del tesoro (oro per tutti)
+        elif room == "Stanza del tesoro":
+            for character in characters:
+                character.add_gold(100)
+
+        # 🛏️ Stanza di ristoro (cura il gruppo)
+        elif room == "Stanza di ristoro rapido":
+            print("🌿 Il gruppo si riposa nella Stanza di Ristoro!")
+            for character in characters:
                 character.heal_percentage(10)
 
-            if room == "Stanza degli artefatti":
+        # 🏺 Stanza degli artefatti (tutti cercano artefatti)
+        elif room == "Stanza degli artefatti":
+            for character in characters:
                 search_artifact(character)
 
-            # Cura opzionale per il personaggio
+        # Cura opzionale per i personaggi feriti
+        for character in characters:
             if character.hp < 10:
-                heal_decision = input(f"{character.name} ha {character.hp} HP. Vuoi curarti? (s/n): ").lower()
+                heal_decision = input(f"{character.name} ha {character.hp} HP. Vuoi curarlo? (s/n): ").lower()
                 if heal_decision == 's':
                     character.heal()
 
-            # Stampa la posizione attuale
-            print(f"\nPosizione di {character.name}: ", current_position)
+        # 🌍 Mostra la posizione
+        print(f"\n📍 Posizione attuale del gruppo: {current_position}")
 
-            # Richiesta di direzione per il movimento
-            direction = input(f"{character.name}, in quale direzione vuoi andare? (sinistra/destra/sopra/sotto): ").lower()
-            if direction not in directions:
-                print("Direzione non valida. Riprova.")
-            else:
-                current_position = move_position(current_position, direction)
+        # ➡️ Scelta della direzione (unica per tutto il gruppo)
+        direction = input("In quale direzione vuoi andare? (sinistra/destra/sopra/sotto): ").lower()
+        if direction in directions:
+            current_position = move_position(current_position, direction)
+        else:
+            print("🚫 Direzione non valida. Riprova.")
 
-            # Chiedi all'utente se vuole continuare a esplorare
-            continue_exploring = input(f"{character.name}, vuoi continuare ad esplorare? (s/n): ").lower()
-            if continue_exploring != 's':
-                break
+        # ⏳ Vuoi continuare?
+        continue_exploring = input("Vuoi continuare ad esplorare? (s/n): ").lower()
+        if continue_exploring != 's':
+            print("🏁 Il gruppo termina l'esplorazione.")
+            break
 
-            room_count += 1
+        room_count += 1
 
 def move_position(current_position, direction):
     x, y = current_position
