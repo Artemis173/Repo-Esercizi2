@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { fetchWP } from '../api';
+import { fetchAssenze } from '../api';
 
-const WP = () => {
-  const [WP, setWP] = useState([]);
+const Assenze = () => {
+  const [Assenze, setAssenze] = useState([]);
 
   useEffect(() => {
-    const getWP = async () => {
-      const data = await fetchWP();
-      setWP(data);
+    const getAssenze = async () => {
+      const data = await fetchAssenze();
+      setAssenze(data);
     };
-    getWP();
+    getAssenze();
   }, []);
 
   return (
     <Container className="mt-4" style={{ fontFamily: 'Arial' }}>
-    <h1 className="text-center" style={{ color: 'red' }}>Work Projects</h1>
+    <h1 className="text-center" style={{ color: 'red' }}>Assenze</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Progetto</th>
-            <th>Nome</th>
-            <th>Inizio</th>
-            <th>Fine</th>
+            <th>Persona</th>
+            <th>Tipo</th>
+            <th>Giorno</th>
           </tr>
         </thead>
         <tbody>
-          {WP.map(WP => (
-            <tr key={WP.id}>
-              <td>{WP.id}</td>
-              <td>{WP.progetto}</td>
-              <td>{WP.nome}</td>
-              <td>{WP.inizio}</td>
-              <td>{WP.fine}</td>
+          {Assenze.map(Assenze => (
+            <tr key={Assenze.id}>
+              <td>{Assenze.id}</td>
+              <td>{Assenze.persona}</td>
+              <td>{Assenze.giorno}</td>
+              <td>{Assenze.tipo}</td>
             </tr>
           ))}
         </tbody>
@@ -50,4 +48,4 @@ const WP = () => {
   );
 };
 
-export default WP;
+export default Assenze;

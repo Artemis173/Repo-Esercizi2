@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Container, Table, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { fetchAttivitaNonProgettuale } from '../api';
 
 const AttivitaNonProgettuale = () => {
@@ -14,8 +15,8 @@ const AttivitaNonProgettuale = () => {
   }, []);
 
   return (
-    <Container className="mt-4">
-      <h1>Attività non Progettuali</h1>
+    <Container className="mt-4" style={{ fontFamily: 'Arial' }}>
+    <h1 className="text-center" style={{ color: 'red' }}>Attività non Progettuali</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -38,6 +39,13 @@ const AttivitaNonProgettuale = () => {
           ))}
         </tbody>
       </Table>
+      <div className="text-center mt-4">
+        <Button variant="primary">
+          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            Torna alla Home
+          </Link>
+        </Button>
+      </div>
     </Container>
   );
 };

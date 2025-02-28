@@ -51,3 +51,13 @@ export const fetchAttivitaNonProgettuale = async () => {
     return [];
   }
 };
+
+export const fetchAssenze = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Assenze`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching absence:', error);
+    return [];
+  }
+};
