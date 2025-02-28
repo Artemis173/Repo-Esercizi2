@@ -105,69 +105,97 @@ def attack(attacker, defender):
         print(f"{attacker.name} attacca {defender.name} ma manca!")
 
 def move_group(characters):
+    directions = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "O": (-1, 0)}
     while True:
-        action = input("Vuoi muoverti o vedere lo status? (M/S): ").upper()
-        if action == "S":
+        move = input("Dove vuoi muoverti? (N/S/E/O): ").upper()
+        if move in directions:
+            dx, dy = directions[move]
+            new_x = max(0, min(15, characters[0].position[0] + dx))
+            new_y = max(0, min(15, characters[0].position[1] + dy))
             for char in characters:
-                char.display_status()
-        elif action == "M":
-            directions = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "O": (-1, 0)}
-            move = input("Dove vuoi muoverti? (N/S/E/O): ").upper()
-            if move in directions:
-                dx, dy = directions[move]
-                new_x = max(0, min(15, characters[0].position[0] + dx))
-                new_y = max(0, min(15, characters[0].position[1] + dy))
-                for char in characters:
-                    char.position = (new_x, new_y)
-                print(f"Il gruppo si è spostato in ({new_x}, {new_y})")
-                return
-        print("Comando non valido. Riprova.")
+                char.position = (new_x, new_y)
+            print(f"Il gruppo si è spostato in ({new_x}, {new_y})")
+            return (new_x, new_y)
+        else:
+            print("Comando non valido. Riprova.")
 
 def explore(characters):
-    explored_rooms = set()
+    explored_rooms = {}
     room_limits = {
-        "Stanza del tesoro": 2,
-        "Stanza degli artefatti": 2,
-        "Stanza di ristoro": 2,
-        "Stanza della cupidigia": 3,
-        "Stanza vuota": 4
+        "Stanza del Tesoro": 2,
+        "Stanza degli Artefatti": 2,
+        "Stanza della Cupidigia": 3,
+        "Stanza Vuota": 4
     }
     room_counts = {room: 0 for room in room_limits}
-    room_counts["Stanza del mostro"] = 0
-    room_types = ["Stanza del mostro", "Stanza del tesoro", "Stanza di ristoro", "Stanza degli artefatti", "Stanza della cupidigia", "Stanza vuota"]
+    room_counts["Stanza del Mostro"] = 0
+    room_types = list(room_limits.keys()) + ["Stanza del Mostro"]
 
-    for _ in range(5):
-        move_group(characters)
-        available_rooms = [room for room in room_types if room not in room_limits or room_counts[room] < room_limits[room]]
-        room = random.choice(available_rooms)
-        room_counts[room] += 1
-        print(f"\n📍 Il gruppo entra in una {room}.")
-        explored_rooms.add(room)
+    for _ in range(25):
+        while True:
+            action = input("Vuoi muoverti o vedere lo status? (M/S): ").upper()
+            if action == "S":
+                for char in characters:
+                    char.display_status()
+            elif action == "M":
+                position = move_group(characters)
+                if position is None:
+                    continue
+                
+                if position in explored_rooms:
+                    room = explored_rooms[position]
+                    if room == "Stanza Conquistata":
+                        print(f"\n📍 Il gruppo entra in una {room}. Non c'è più nulla!")
+                        continue
+                else:
+                    available_rooms = [room for room in room_types if room_counts.get(room, 0) < room_limits.get(room, 0)]
+                    if not available_rooms or any(room_counts.get(room, 0) >= room_limits[room] for room in room_limits):
+                        room = "Stanza del Mostro"
+                    else:
+                        room = random.choice(available_rooms)
+                        room_counts[room] += 1
+                    explored_rooms[position] = room
+                
+                print(f"\n📍 Il gruppo entra in una {room}.")
+                break
+            else:
+                print("Comando non valido. Riprova.")
 
-        if room == "Stanza del mostro":
+        if room == "Stanza Conquistata":
+            print(f"\n🏆 Il gruppo ha conquistato la stanza!")
+
+        elif room == "Stanza Vuota":
+            print(f"\n🚫 Il gruppo entra in una stanza. La stanza è vuota!")
+                  
+        elif room == "Stanza del Mostro":
+            print(f"\n👹 Il gruppo incontra dei mostri!")
             monsters = [create_monster()]
             if not combat(characters, monsters):
                 print("❌ Il gruppo ha fallito l'esplorazione.")
                 return
             
-        elif room == "Stanza del tesoro":
+        elif room == "Stanza del Tesoro":
+            print(f"\n🏆 Il gruppo ha trovato dell'oro!")
             for char in characters:
                 char.add_gold(50)
 
-        elif room == "Stanza di ristoro":
+        elif room == "Stanza di Ristoro":
+            print("\n❓ Il gruppo ha trovato una Spiazzo desolato?")
             for char in characters:
                 char.heal_percentage(20)
+                print("\n❤️  Il gruppo si riposa e recupera la salute.")
 
-        elif room == "Stanza degli artefatti":
+        elif room == "Stanza degli Artefatti":
                     if roll_dice(20) > 15:
                         artifact = get_random_artifact()
                         chosen_character = random.choice(characters)
-                        chosen_character.equipment.append(artifact)
+                        chosen_character.equipment.append(random.choice(artifact))
                         print(f"🔮 {chosen_character.name} ha trovato l'artefatto: {artifact.name} (ATK: {artifact.attack_bonus}, DEF: {artifact.defense_bonus})!")
                     else:
                         print("❌ Nessun artefatto trovato.")
 
-        elif room == "Stanza della cupidigia":
+        elif room == "Stanza della Cupidigia":
+            print(f"\n🏺 Il gruppo ha trovato un antico baule!")
             for char in characters:
                 if char.hp > 1:
                     char.hp //= 2
