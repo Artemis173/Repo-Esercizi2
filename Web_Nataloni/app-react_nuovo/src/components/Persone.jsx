@@ -3,6 +3,10 @@ import { Container, Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { fetchPersona } from '../api';
 
+const generateRandomSurname = () => {
+  const surnames = ['Rossi', 'Bianchi', 'Verdi', 'Russo', 'Ferrari', 'Esposito', 'Romano', 'Colombo', 'Ricci', 'Marino', 'Augusto', 'Santillo'];
+  return surnames[Math.floor(Math.random() * surnames.length)];
+};  
 const generateRandomEmail = () => {
   const domains = ['gmail.com', 'libero.it', 'hotmail.com'];
   const name = Math.random().toString(36).substring(2, 8);
@@ -33,6 +37,7 @@ const Persona = () => {
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Cognome</th>
             <th>Email</th>
             <th>Username</th>
             <th>Posizione</th>
@@ -44,6 +49,7 @@ const Persona = () => {
             <tr key={Persona.id}>
               <td>{Persona.id}</td>
               <td>{Persona.nome}</td>
+              <td>{generateRandomSurname()}</td>
               <td>{generateRandomEmail()}</td>
               <td>{generateRandomUsername()}</td>
               <td>{Persona.posizione}</td>
