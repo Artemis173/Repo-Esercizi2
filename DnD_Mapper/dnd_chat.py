@@ -1,11 +1,13 @@
 import random
 from artifacts import get_random_artifact
+from monsters import get_random_monsters
 
 class Equipment:
-    def __init__(self, name, attack_bonus, defense_bonus):
+    def __init__(self, name, attack_bonus, defense_bonus, dex_changes):
         self.name = name
         self.attack_bonus = attack_bonus
         self.defense_bonus = defense_bonus
+        self.dex_changes = dex_changes
 
 class Character:
     def __init__(self, name, char_class, hp, strength, dex, intelligence, equipment, gold, position):
@@ -29,10 +31,17 @@ class Character:
         print(f"{self.name} ha guadagnato {amount} oro. Totale: {self.gold} oro.")
 
     def display_status(self):
-        print(f"{self.name} ({self.char_class}) - HP: {self.hp}, Forza: {self.strength}, Destrezza: {self.dex}, Intelligenza: {self.intelligence}, Oro: {self.gold}")
-        print("Equipaggiamento:")
-        for item in self.equipment:
-            print(f" - {item.name} (Att: {item.attack_bonus}, Dif: {item.defense_bonus})")
+        print(f"\033[1;32m{self.name}\033[0m (\033[1;36m{self.char_class}\033[0m)")
+
+        print(f"❤️  HP: \033[1;31m{self.hp}\033[0m  | 💪 Forza: \033[1;34m{self.strength}\033[0m  | 🏃 Destrezza: \033[1;35m{self.dex}\033[0m  | 🧠 Intelligenza: \033[1;33m{self.intelligence}\033[0m  | 💰 Oro: \033[1;33m{self.gold}\033[0m")
+        
+        print("\033[1;33mEquipaggiamento:\033[0m")
+        if self.equipment:
+            for item in self.equipment:
+                print(f"  - \033[1;37m{item.name}\033[0m (⚔️ Att: \033[1;31m{item.attack_bonus}\033[0m, 🛡️ Dif: \033[1;34m{item.defense_bonus}\033[0m), 🏃 Dex: \033[1;31m{item.dex_changes}\033[0m")
+        else:
+            print("  Nessun equipaggiamento.")
+
 
     def add_equipment(self, equipment):
         self.equipment.append(equipment)
@@ -47,14 +56,6 @@ class Monster:
         self.intelligence = intelligence
         self.equipment = equipment
 
-def create_monster():
-    monsters = [
-        ("Goblin Guerriero", 10, 12, 10, 6, [Equipment('Spada corta', 1, 0)]),
-        ("Goblin Lancieri", 8, 10, 12, 6, [Equipment('Lancia', 2, 0)]),
-        ("Re dei Goblin", 20, 15, 12, 10, [Equipment("Spada lunga", 3, 1), Equipment("Armatura", 0, 4)])
-    ]
-    return Monster(*random.choice(monsters))
-
 def roll_dice(sides):
     return random.randint(1, sides)
 
@@ -68,25 +69,45 @@ def get_damage_dice(char_class):
     return 6  # Default damage dice
 
 def combat(characters, monsters):
-    print("\n⚔️ Inizia il combattimento!")
-    while any(c.hp > 0 for c in characters) and any(m.hp > 0 for m in monsters):
-        print("\n🔥 Il gruppo attacca!")
-        for character in characters:
-            if character.hp > 0:
+    print("\n⚔️ \033[1;33mInizia il combattimento!\033[0m ⚔️")  # Titolo in giallo
+
+    # Creiamo una lista di turni ordinata per destrezza (dal più alto al più basso)
+    turn_order = sorted(characters + monsters, key=lambda x: x.dex, reverse=True)
+
+    def colorize(name, is_character):
+        return f"\033[1;32m{name}\033[0m" if is_character else f"\033[1;31m{name}\033[0m"
+
+    while characters and monsters:
+        for fighter in turn_order:
+            if fighter in characters:
+                if not monsters:
+                    print("\n✅ \033[1;32mIl gruppo ha vinto la battaglia!\033[0m")
+                    return True
                 target = random.choice(monsters)
-                attack(character, target)
-        monsters = [m for m in monsters if m.hp > 0]
-        if not monsters:
-            print("🎉 Il gruppo ha vinto!")
-            return True
-        print("\n⚠️ I mostri attaccano!")
-        for monster in monsters:
-            target = random.choice([c for c in characters if c.hp > 0])
-            attack(monster, target)
-        characters = [c for c in characters if c.hp > 0]
-        if not characters:
-            print("❌ Il gruppo è stato sconfitto!")
-            return False
+                damage = max(1, (fighter.strength + sum(item.attack_bonus for item in fighter.equipment)) - ((target.dex + sum(item.dex_changes for item in fighter.equipment)) // 2))
+                target.hp -= damage
+                print(f"{colorize(fighter.name, True)} attacca {colorize(target.name, False)} e infligge {damage} danni! ({target.hp} HP rimasti)")
+
+                if target.hp <= 0:
+                    print(f"💀 {colorize(target.name, False)} è stato sconfitto!")
+                    monsters.remove(target)
+                    turn_order.remove(target)  # Rimuoviamo il mostro dai turni
+
+            elif fighter in monsters:
+                if not characters:
+                    print("\n❌ \033[1;31mIl gruppo è stato sconfitto...\033[0m")
+                    return False
+                target = random.choice(characters)
+                damage = max(1, (fighter.strength + sum(item.attack_bonus for item in fighter.equipment)) - ((target.dex + sum(item.dex_changes for item in fighter.equipment)) // 2))
+                target.hp -= damage
+                print(f"{colorize(fighter.name, False)} attacca {colorize(target.name, True)} e infligge {damage} danni! ({target.hp} HP rimasti)")
+
+                if target.hp <= 0:
+                    print(f"☠️ {colorize(target.name, True)} è stato sconfitto!")
+                    characters.remove(target)
+                    turn_order.remove(target)  # Rimuoviamo il personaggio dai turni
+
+    return True if characters else False
 
 def attack(attacker, defender):
     roll = roll_dice(20)
@@ -169,7 +190,7 @@ def explore(characters):
                   
         elif room == "Stanza del Mostro":
             print(f"\n👹 Il gruppo incontra dei mostri!")
-            monsters = [create_monster()]
+            monsters = get_random_monsters()
             if not combat(characters, monsters):
                 print("❌ Il gruppo ha fallito l'esplorazione.")
                 return
@@ -204,8 +225,8 @@ def explore(characters):
     print("🏁 Esplorazione completata!")
 
 spawn_position = (random.randint(0, 15), random.randint(0, 15))
-thalion = Character("Thalion", "Guerriero", 20, 16, 10, 8, [Equipment("Spada", 2, 0)], 50, spawn_position)
-elara = Character("Elara", "Mago", 15, 8, 14, 16, [Equipment("Bastone", 1, 0)], 20, spawn_position)
-finnian = Character("Finnian", "Ladro", 18, 14, 16, 10, [Equipment("Pugnale", 1, 0)], 30, spawn_position)
+thalion = Character("Thalion", "Guerriero", 40, 20, 10, 8, [Equipment("Spada", 2, 0, 0)], 50, spawn_position)
+elara = Character("Elara", "Mago", 26, 12, 14, 16, [Equipment("Bastone", 1, 0, 0)], 20, spawn_position)
+finnian = Character("Finnian", "Ladro", 32, 18, 16, 10, [Equipment("Pugnale", 1, 0, 0)], 30, spawn_position)
 
 explore([thalion, elara, finnian])
