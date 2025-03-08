@@ -160,6 +160,7 @@ def explore(characters):
                     char.display_status()
             elif action == "M":
                 position = move_group(characters)
+                #position.append(explored_rooms)
                 if position is None:
                     continue
                 
