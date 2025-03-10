@@ -143,6 +143,7 @@ def move_group(characters):
 def explore(characters):
     explored_rooms = {}
     room_limits = {
+        "Stanza di Ristoro": 2,
         "Stanza del Tesoro": 2,
         "Stanza degli Artefatti": 2,
         "Stanza della Cupidigia": 3,
