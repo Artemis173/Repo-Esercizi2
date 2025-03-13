@@ -1,6 +1,6 @@
 import random
-from artifacts import get_random_artifact
-from monsters import get_random_monsters
+from DnD_Mapper.artifacts import get_random_artifact
+from DnD_Mapper.monsters import get_random_monsters
 
 class Equipment:
     def __init__(self, name, attack_bonus, defense_bonus, dex_changes):
@@ -209,11 +209,12 @@ def explore(characters):
                 print("\n❤️  Il gruppo si riposa e recupera la salute.")
 
         elif room == "Stanza degli Artefatti":
-                    if roll_dice(20) > 15:
+                    roll = (roll_dice(20) + characters.intelligence)
+                    if roll > 15:
                         artifact = get_random_artifact()
                         chosen_character = random.choice(characters)
                         chosen_character.equipment.append(random.choice(artifact))
-                        print(f"🔮 {chosen_character.name} ha trovato l'artefatto: {artifact.name} (ATK: {artifact.attack_bonus}, DEF: {artifact.defense_bonus})!")
+                        print(f"🔮 {chosen_character.name} ha trovato l'artefatto: {artifact.name} (ATK: {artifact.attack_bonus}, DEF: {artifact.defense_bonus} DEX: {artifact.dex_changes})!")
                     else:
                         print("❌ Nessun artefatto trovato.")
 
