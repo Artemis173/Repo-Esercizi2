@@ -293,7 +293,7 @@ Session example
 ;;
 ;;Mi aspetto come valori solo tipi json (integer, string, float, vector, alist)
 (define-public (mtfa-bc::AddKV requester class key value)
-  ;; (Show! (list requester class key value))
+  (Show! (list "mtfa-bc::AddKV" requester class key value))
   (mtfa-noerr
    #f
    (when (string? key)
