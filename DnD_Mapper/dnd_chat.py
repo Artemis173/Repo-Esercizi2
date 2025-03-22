@@ -1,7 +1,7 @@
 import random
-from DnD_Mapper.artifacts import get_random_artifact
-from DnD_Mapper.monsters import get_random_monsters
-from DnD_Mapper.characters_data import characters
+from artifacts import get_random_artifact
+from monsters import get_random_monsters
+from characters_data import CHARACHTER_LIST
 
 class Equipment:
     def __init__(self, name, attack_bonus, defense_bonus, dex_changes):
@@ -210,14 +210,15 @@ def explore(characters):
                 print("\n❤️  Il gruppo si riposa e recupera la salute.")
 
         elif room == "Stanza degli Artefatti":
-                    roll = (roll_dice(20) + characters.intelligence)
-                    if roll > 15:
-                        artifact = get_random_artifact()
-                        chosen_character = random.choice(characters)
-                        chosen_character.equipment.append(random.choice(artifact))
-                        print(f"🔮 {chosen_character.name} ha trovato l'artefatto: {artifact.name} (ATK: {artifact.attack_bonus}, DEF: {artifact.defense_bonus} DEX: {artifact.dex_changes})!")
-                    else:
-                        print("❌ Nessun artefatto trovato.")
+                    if characters:  # Controlla che ci sia almeno un personaggio nel gruppo
+                        roll = roll_dice(20) + characters[0].intelligence
+                        if roll > 15:
+                            artifact = get_random_artifact()  # Ottiene un artefatto casuale
+                            chosen_character = random.choice(characters)  # Sceglie un personaggio
+                            chosen_character.equipment.append(artifact)  # Aggiunge l'artefatto all'equipaggiamento
+                            print(f"🔮 {chosen_character.name} ha trovato l'artefatto: {artifact}!")
+                        else:
+                            print("❌ Nessun artefatto trovato.")
 
         elif room == "Stanza della Cupidigia":
             print(f"\n🏺 Il gruppo ha trovato un antico baule!")
@@ -229,26 +230,30 @@ def explore(characters):
     print("🏁 Esplorazione completata!")
     
 def select_characters():
-    available_characters = [Character(**char, position=(random.randint(0, 15), random.randint(0, 15))) for char in characters]
-    chosen_characters = []
+    available_characters = [Character(
+        char.name, char.char_class, char.hp, char.strength, char.dex, 
+        char.intelligence, char.equipment, char.gold, 
+        position=(random.randint(0, 15), random.randint(0, 15))
+    ) for char in CHARACHTER_LIST]
 
-    print("\nSeleziona fino a 3 personaggi per il tuo gruppo:")
-    for i, char in enumerate(available_characters):
-        print(f"{i + 1}. {char.name} ({char.char_class})")
+    chosen_characters = []
+    
+    print("\nSeleziona fino a 3 personaggi per il tuo gruppo scrivendo il loro nome:")
+    for char in available_characters:
+        print(f"- {char.name} ({char.char_class})")
     
     while len(chosen_characters) < 3:
-        choice = input("Inserisci il numero del personaggio da selezionare (o premi Invio per terminare): ")
+        choice = input("Inserisci il nome del personaggio da selezionare (o premi Invio per terminare): ").strip()
         if not choice:
             break
-        try:
-            choice_index = int(choice) - 1
-            if 0 <= choice_index < len(available_characters):
-                chosen_characters.append(available_characters.pop(choice_index))
-                print(f"✅ {chosen_characters[-1].name} aggiunto al gruppo!")
-            else:
-                print("❌ Scelta non valida.")
-        except ValueError:
-            print("❌ Inserisci un numero valido.")
+        
+        found_char = next((char for char in available_characters if char.name.lower() == choice.lower()), None)
+        if found_char:
+            chosen_characters.append(found_char)
+            available_characters.remove(found_char)
+            print(f"✅ {found_char.name} aggiunto al gruppo!")
+        else:
+            print("❌ Nome non valido. Riprova.")
 
     return chosen_characters
 
@@ -258,8 +263,6 @@ if __name__ == "__main__":
         print("❌ Nessun personaggio selezionato. Uscita dal gioco.")
     else:
         print("\n🎲 Il gruppo è pronto all'esplorazione!")
-        for char in selected_party:
-            char.display_status()
         explore(selected_party)
 
 # spawn_position = (random.randint(0, 15), random.randint(0, 15))

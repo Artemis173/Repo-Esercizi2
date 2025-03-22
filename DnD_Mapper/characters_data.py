@@ -1,32 +1,23 @@
-characters = [
-    {
-        "name": "Thalion",
-        "char_class": "Guerriero",
-        "hp": 40,
-        "strength": 20,
-        "dex": 10,
-        "intelligence": 8,
-        "equipment": [{"name": "Spada", "attack_bonus": 2, "defense_bonus": 0, "dex_changes": 0}],
-        "gold": 50
-    },
-    {
-        "name": "Elara",
-        "char_class": "Mago",
-        "hp": 26,
-        "strength": 12,
-        "dex": 14,
-        "intelligence": 16,
-        "equipment": [{"name": "Bastone", "attack_bonus": 1, "defense_bonus": 0, "dex_changes": 0}],
-        "gold": 20
-    },
-    {
-        "name": "Finnian",
-        "char_class": "Ladro",
-        "hp": 32,
-        "strength": 18,
-        "dex": 16,
-        "intelligence": 10,
-        "equipment": [{"name": "Pugnale", "attack_bonus": 1, "defense_bonus": 0, "dex_changes": 0}],
-        "gold": 30
-    }
+class Character:
+    def __init__(self, name, char_class, hp, strength, dex, intelligence, equipment, gold):
+        self.name = name
+        self.char_class = char_class
+        self.hp = hp
+        self.strength = strength
+        self.dex = dex
+        self.intelligence = intelligence
+        self.equipment = equipment
+        self.gold = gold
+
+class Equipment:
+    def __init__(self, name, attack_bonus, defense_bonus, dex_changes):
+        self.name = name
+        self.attack_bonus = attack_bonus
+        self.defense_bonus = defense_bonus
+        self.dex_changes = dex_changes
+
+CHARACHTER_LIST = [
+    Character("Thalion", "Guerriero", 40, 20, 10, 8, [Equipment("Spada", 2, 0, 0)], 50),
+    Character("Elara", "Mago", 26, 12, 14, 16, [Equipment("Bastone", 1, 0, 0)], 20),
+    Character("Finnian", "Ladro", 32, 18, 16, 10, [Equipment("Pugnale", 1, 0, 0)], 30)
 ]
