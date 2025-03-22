@@ -1,6 +1,7 @@
 import random
 from DnD_Mapper.artifacts import get_random_artifact
 from DnD_Mapper.monsters import get_random_monsters
+from DnD_Mapper.characters_data import characters
 
 class Equipment:
     def __init__(self, name, attack_bonus, defense_bonus, dex_changes):
@@ -226,10 +227,44 @@ def explore(characters):
                     char.add_gold(100)
 
     print("🏁 Esplorazione completata!")
+    
+def select_characters():
+    available_characters = [Character(**char, position=(random.randint(0, 15), random.randint(0, 15))) for char in characters]
+    chosen_characters = []
 
-spawn_position = (random.randint(0, 15), random.randint(0, 15))
-thalion = Character("Thalion", "Guerriero", 40, 20, 10, 8, [Equipment("Spada", 2, 0, 0)], 50, spawn_position)
-elara = Character("Elara", "Mago", 26, 12, 14, 16, [Equipment("Bastone", 1, 0, 0)], 20, spawn_position)
-finnian = Character("Finnian", "Ladro", 32, 18, 16, 10, [Equipment("Pugnale", 1, 0, 0)], 30, spawn_position)
+    print("\nSeleziona fino a 3 personaggi per il tuo gruppo:")
+    for i, char in enumerate(available_characters):
+        print(f"{i + 1}. {char.name} ({char.char_class})")
+    
+    while len(chosen_characters) < 3:
+        choice = input("Inserisci il numero del personaggio da selezionare (o premi Invio per terminare): ")
+        if not choice:
+            break
+        try:
+            choice_index = int(choice) - 1
+            if 0 <= choice_index < len(available_characters):
+                chosen_characters.append(available_characters.pop(choice_index))
+                print(f"✅ {chosen_characters[-1].name} aggiunto al gruppo!")
+            else:
+                print("❌ Scelta non valida.")
+        except ValueError:
+            print("❌ Inserisci un numero valido.")
 
-explore([thalion, elara, finnian])
+    return chosen_characters
+
+if __name__ == "__main__":
+    selected_party = select_characters()
+    if not selected_party:
+        print("❌ Nessun personaggio selezionato. Uscita dal gioco.")
+    else:
+        print("\n🎲 Il gruppo è pronto all'esplorazione!")
+        for char in selected_party:
+            char.display_status()
+        explore(selected_party)
+
+# spawn_position = (random.randint(0, 15), random.randint(0, 15))
+# thalion = Character("Thalion", "Guerriero", 40, 20, 10, 8, [Equipment("Spada", 2, 0, 0)], 50, spawn_position)
+# elara = Character("Elara", "Mago", 26, 12, 14, 16, [Equipment("Bastone", 1, 0, 0)], 20, spawn_position)
+# finnian = Character("Finnian", "Ladro", 32, 18, 16, 10, [Equipment("Pugnale", 1, 0, 0)], 30, spawn_position)
+
+# explore([thalion, elara, finnian])SSSS
