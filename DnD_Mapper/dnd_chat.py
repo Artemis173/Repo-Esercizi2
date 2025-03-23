@@ -264,10 +264,3 @@ if __name__ == "__main__":
     else:
         print("\n🎲 Il gruppo è pronto all'esplorazione!")
         explore(selected_party)
-
-# spawn_position = (random.randint(0, 15), random.randint(0, 15))
-# thalion = Character("Thalion", "Guerriero", 40, 20, 10, 8, [Equipment("Spada", 2, 0, 0)], 50, spawn_position)
-# elara = Character("Elara", "Mago", 26, 12, 14, 16, [Equipment("Bastone", 1, 0, 0)], 20, spawn_position)
-# finnian = Character("Finnian", "Ladro", 32, 18, 16, 10, [Equipment("Pugnale", 1, 0, 0)], 30, spawn_position)
-
-# explore([thalion, elara, finnian])SSSS
