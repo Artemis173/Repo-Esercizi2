@@ -264,3 +264,5 @@ if __name__ == "__main__":
     else:
         print("\n🎲 Il gruppo è pronto all'esplorazione!")
         explore(selected_party)
+
+
