@@ -9,8 +9,8 @@ where a.codice = 'HTR' and (a.codice = ap.arrivo or a.codice = ap.partenza) and 
 group by a.codice;
 
 select l.nazione, count(l.aeroporto) as num_aeroporti
-from luogoAeroporto l, arrPart ap, compagnia c
-where (l.aeroporto = ap.arrivo or l.aeroporto = ap.partenza) and ap.comp = c.nome and c.nome = 'Apitalia'
+from luogoAeroporto l, arrPart ap
+where (l.aeroporto = ap.arrivo or l.aeroporto = ap.partenza) and ap.comp = 'Apitalia'
 group by l.nazione;
 
 select cast(avg(v.durataMinuti) as decimal(10,2)) as media, max(v.durataMinuti) as massimo, min(v.durataMinuti) as minimo
@@ -22,10 +22,10 @@ from aeroporto a, arrPart ap, compagnia c
 where (a.codice = ap.arrivo or a.codice = ap.partenza) and ap.comp = c.nome
 group by a.codice;
 
-select l.nazione, count(distinct l2.nazione) as num_nazioni
-from luogoAeroporto l, luogoAeroporto l2, arrPart ap
-where l.aeroporto = ap.arrivo and l2.aeroporto = ap.partenza
-group by l.nazione;
+select lp.nazione as nazione, count(distinct la.nazione) as raggiungibili
+from arrpart ap, luogoaeroporto lp, luogoaeroporto la
+where ap.partenza = lp.aeroporto and ap.arrivo = la.aeroporto and lp.nazione <> la.nazione
+group by lp.nazione;
 
 select a.codice, a.nome, cast(avg(v.durataMinuti) as decimal(10,2)) as media
 from aeroporto a, arrPart ap, volo v
