@@ -33,7 +33,7 @@ select distinct a.partenza as codice, ae.nome, la.citta
 from ArrPart a, aereoporto ae, luogoAeroporto la
 where a.partenza = ae.codice and ae.codice = la.aereoporto and a.comp = 'MagicFly';
 
-select v.codice, v.comp, laPart.nome AS aeroportoPartenza, laArr.nome AS aeroportoArrivo
+select v.codice, v.comp, laPart.aereoporto AS aeroportoPartenza, laArr.aereoporto AS aeroportoArrivo
 from Volo v
 join ArrPart ap on v.codice = ap.codice
 join LuogoAeroporto laPart on ap.partenza = laPart.aeroporto
